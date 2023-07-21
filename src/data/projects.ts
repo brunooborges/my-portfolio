@@ -126,7 +126,7 @@ Technologies:
     - TypeScript
     - Styled Components`,
     github: 'https://github.com/brunooborges/my-portfolio',
-    live: 'https://brunooborges.netlify.app',
+    live: 'https://brunoborges.netlify.app',
     screenshot: [project8],
   },
 ];
