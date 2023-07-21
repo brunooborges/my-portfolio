@@ -138,7 +138,7 @@ export const Container = styled.section`
     flex-direction: column-reverse;
     margin: 24px 0;
     max-height: 100%;
-    padding: 20px 0;
+    padding: 16px;
 
     .slider {
       margin: auto;
@@ -196,7 +196,7 @@ export const Container = styled.section`
   @media only screen and (min-width: 768px) and (max-width: 1366px) {
     margin: 24px 0;
     max-height: 100%;
-    padding: 20px 0;
+
     .slider {
       .slider-navigator {
         div {
@@ -256,7 +256,7 @@ export const Project = styled.div<ProjectProps>`
     flex-direction: column;
     align-items: flex-start;
     position: relative;
-    width: 90%;
+    width: 33%;
     left: -35px;
     height: 85vh;
     opacity: 0;
@@ -285,7 +285,7 @@ export const Project = styled.div<ProjectProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
+    width: 50%;
     height: 100%;
 
     .bg-effect {
@@ -309,7 +309,7 @@ export const Project = styled.div<ProjectProps>`
     }
   }
 
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 1260px) {
     flex-direction: column;
     justify-content: center;
     max-height: 100%;
@@ -319,6 +319,7 @@ export const Project = styled.div<ProjectProps>`
       margin: 0px auto;
       align-items: center;
       height: 100%;
+      width: 100%;
 
       h1 {
         font-size: 36px;
@@ -330,6 +331,8 @@ export const Project = styled.div<ProjectProps>`
       }
     }
     .right-section {
+      width: 100%;
+
       .bg-effect {
         width: 100%;
         height: 100%;
