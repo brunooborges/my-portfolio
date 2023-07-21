@@ -23,7 +23,7 @@ export default function Intro(props: IntroProps): JSX.Element {
       <div className='info'>
         <p>Hi, my name is</p>
         <h1>Bruno Borges</h1>
-        <h2>Front-end Developer</h2>
+        <h2>Front-End Developer</h2>
         <div>
           <a
             href='https://www.linkedin.com/in/brunooborges/'

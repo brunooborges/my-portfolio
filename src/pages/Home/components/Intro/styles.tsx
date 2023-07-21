@@ -78,19 +78,19 @@ export const Container = styled.section<ContainerProps>`
     p {
       color: ${({ theme }) => theme.colors.highlight};
       font-weight: 800;
-      font-size: 30px;
+      font-size: 24px;
     }
 
     h1 {
       color: ${({ theme }) => theme.colors.text.light};
       font-weight: 800;
-      font-size: 90px;
+      font-size: 80px;
     }
 
     h2 {
       color: ${({ theme }) => theme.colors.text.main};
       font-weight: 800;
-      font-size: 80px;
+      font-size: 72px;
     }
 
     a {
@@ -171,7 +171,23 @@ export const Container = styled.section<ContainerProps>`
     }
   }
 
-  @media only screen and (max-width: 635px) {
+  @media only screen and (min-width: 767px) and (max-width: 1024px) {
+    margin: auto;
+    padding-left: 8px;
+    .info {
+      p {
+        font-size: 24px;
+      }
+      h1 {
+        font-size: 64px;
+      }
+      h2 {
+        font-size: 56px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
     margin: auto;
     padding-left: 8px;
     .info {
@@ -179,10 +195,10 @@ export const Container = styled.section<ContainerProps>`
         font-size: 16px;
       }
       h1 {
-        font-size: 28px;
+        font-size: 32px;
       }
       h2 {
-        font-size: 20px;
+        font-size: 24px;
       }
     }
   }

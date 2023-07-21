@@ -118,7 +118,7 @@ export const Container = styled.section<ContainerProps>`
     }
   }
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 767px) {
     margin: auto;
     margin-top: 24px;
     padding-left: 0px;
@@ -175,7 +175,7 @@ export const Container = styled.section<ContainerProps>`
     }
   }
 
-  @media only screen and (min-width: 701px) and (max-width: 1024px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     margin: auto;
     margin-top: 24px;
     padding-left: 0px;
