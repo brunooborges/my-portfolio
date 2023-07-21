@@ -258,7 +258,6 @@ export const Project = styled.div<ProjectProps>`
     position: relative;
     width: 33%;
     left: -35px;
-    height: 85vh;
     opacity: 0;
     margin-left: 16px;
     margin-right: 36px;
