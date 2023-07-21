@@ -36,10 +36,12 @@ export const Container = styled.section`
   .slider {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 100%;
     margin: 0 24px;
 
     .slider-carousel {
+      height: 75vh;
+
       .slider-counter {
         width: inherit;
         height: 90px;
@@ -60,6 +62,9 @@ export const Container = styled.section`
       display: flex;
       flex-direction: column;
       width: 100%;
+      max-height: 50vh;
+      height: 100%;
+      justify-content: space-around;
 
       div {
         width: 20px;
@@ -129,11 +134,12 @@ export const Container = styled.section`
     overflow: hidden;
   }
 
-  @media only screen and (max-width: 999px) {
+  @media only screen and (max-width: 767px) {
     flex-direction: column-reverse;
     margin: 24px 0;
-    padding-top: 0;
     max-height: 100%;
+    padding: 20px 0;
+
     .slider {
       margin: auto;
       align-items: center;
@@ -142,6 +148,7 @@ export const Container = styled.section`
       .slider-carousel {
         display: flex;
         align-items: center;
+        height: 100%;
         .slider-counter {
           margin: 0;
           .slide-number {
@@ -184,10 +191,12 @@ export const Container = styled.section`
   .projects {
     justify-content: center;
     margin: 0;
-    padding: 16px 16px 0 0;
   }
 
-  @media only screen and (min-width: 769px) and (max-width: 1366px) {
+  @media only screen and (min-width: 768px) and (max-width: 1366px) {
+    margin: 24px 0;
+    max-height: 100%;
+    padding: 20px 0;
     .slider {
       .slider-navigator {
         div {
@@ -249,6 +258,7 @@ export const Project = styled.div<ProjectProps>`
     position: relative;
     width: 90%;
     left: -35px;
+    height: 85vh;
     opacity: 0;
     margin-left: 16px;
     margin-right: 36px;
@@ -275,14 +285,13 @@ export const Project = styled.div<ProjectProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
 
     .bg-effect {
       display: flex;
       justify-content: center;
       align-items: center;
-      max-width: 40vw;
       width: 100%;
       height: auto;
       margin-left: 16px;
@@ -302,25 +311,32 @@ export const Project = styled.div<ProjectProps>`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1024px) {
     flex-direction: column;
     justify-content: center;
     max-height: 100%;
-    max-width: 90%;
+    max-width: 100%;
 
     .left-section {
-      margin: 16px auto;
+      margin: 0px auto;
       align-items: center;
+      height: 100%;
 
       h1 {
         font-size: 36px;
         text-align: center;
       }
+
+      p {
+        font-size: 16px;
+      }
     }
     .right-section {
       .bg-effect {
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        margin-top: 32px;
 
         img {
           height: auto;
@@ -336,37 +352,15 @@ export const Project = styled.div<ProjectProps>`
     }
   }
 
-  @media only screen and (min-width: 1000px) and (max-width: 1366px) {
-    justify-content: space-between;
-    flex-direction: column;
-
+  @media only screen and (max-width: 768px) {
     .left-section {
-      margin: 16px;
-      align-items: center;
-
       h1 {
-        font-size: 36px;
+        font-size: 32px;
+        text-align: center;
       }
-    }
-    .right-section {
-      margin-left: 16px;
 
-      .bg-effect {
-        width: 100%;
-        height: auto;
-        margin-right: 32px;
-
-        img {
-          height: auto;
-          width: 100%;
-          padding: 8px;
-        }
-
-        .link-button {
-          position: fixed;
-          top: unset;
-          left: unset;
-        }
+      p {
+        font-size: 12px;
       }
     }
   }
