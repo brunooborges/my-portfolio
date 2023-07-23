@@ -64,7 +64,7 @@ export const Container = styled.section<ContainerProps>`
 
       .slide-from-right {
         img {
-          height: 250px;
+          height: 300px;
           margin-right: 240px;
         }
         ${({ 'data-isvisible': isVisible }) =>
@@ -199,7 +199,7 @@ export const Container = styled.section<ContainerProps>`
 
         .slide-from-right {
           img {
-            height: 200px;
+            height: 250px;
             margin-top: 12px;
             margin-right: 0;
             margin: 16px 0;
