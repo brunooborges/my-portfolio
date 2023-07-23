@@ -68,9 +68,10 @@ export default function About(props: AboutProps): JSX.Element {
               back-end development, particularly in Node.js and PHP, so I intend to work as a
               Fullstack Developer in the future.
               <br />
-              <br />
-              As a technology and innovation enthusiast, I am eagerly looking forward to being part
-              of a team that shares the same passion!
+              <br />I am excited about the possibilities this journey offers and look forward to
+              contributing to innovative projects that enhance user experiences on the web. The
+              challenge of being a Fullstack professional motivates me to continuously learn and
+              become an active and versatile part of the development community.
             </p>
           </div>
           <div className='slide-from-right'>
