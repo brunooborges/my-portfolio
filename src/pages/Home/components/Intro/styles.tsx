@@ -172,7 +172,6 @@ export const Container = styled.section<ContainerProps>`
   }
 
   @media only screen and (min-width: 767px) and (max-width: 1024px) {
-    margin: auto;
     padding-left: 8px;
     .info {
       p {
@@ -188,7 +187,6 @@ export const Container = styled.section<ContainerProps>`
   }
 
   @media only screen and (max-width: 767px) {
-    margin: auto;
     padding-left: 8px;
     .info {
       p {

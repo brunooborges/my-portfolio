@@ -136,7 +136,7 @@ export const Container = styled.section`
 
   @media only screen and (max-width: 767px) {
     flex-direction: column-reverse;
-    margin: 24px 0;
+    margin: 24px;
     max-height: 100%;
     padding: 16px;
 
@@ -194,7 +194,7 @@ export const Container = styled.section`
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1366px) {
-    margin: 24px 0;
+    margin: 24px;
     max-height: 100%;
 
     .slider {
