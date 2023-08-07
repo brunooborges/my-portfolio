@@ -27,9 +27,9 @@ At present, the back end is hosted on Render, the database on ElephantSQL, and t
 
 Technologies:
   - Node.js with Express
-  - PostgresSQL
+  - PostgreSQL
   - REST API
-  - React
+  - React.js
   - Styled Components
 
   Links for the Front and Back end:`,
