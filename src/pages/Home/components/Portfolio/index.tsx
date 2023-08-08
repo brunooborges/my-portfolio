@@ -91,14 +91,26 @@ export default function Portfolio(props: PortfolioProps): JSX.Element {
                 className='link-button'
                 type='button'
               >
-                <a href={project.github}>Source Code</a>
+                <a
+                  target='_blank'
+                  href={project.github}
+                  rel='noreferrer'
+                >
+                  Source Code
+                </a>
               </button>
               {project.github2 && (
                 <button
                   className='link-button'
                   type='button'
                 >
-                  <a href={project.github2}>Source Code</a>
+                  <a
+                    target='_blank'
+                    href={project.github2}
+                    rel='noreferrer'
+                  >
+                    Source Code
+                  </a>
                 </button>
               )}
             </div>
@@ -116,7 +128,13 @@ export default function Portfolio(props: PortfolioProps): JSX.Element {
                 className='link-button'
                 type='button'
               >
-                <a href={project.live}>Visit website</a>
+                <a
+                  target='_blank'
+                  href={project.live}
+                  rel='noreferrer'
+                >
+                  Visit website
+                </a>
               </button>
             </div>
           </Project>
