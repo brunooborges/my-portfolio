@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     id: 1,
     name: 'MyContacts',
-    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with Express to build the back end, providing a REST API, and utilizes React for the front end. The main purpose of the application is to manage a contacts list with features like categorization, search, and sorting, all of which are supported through the implemented REST API.
+    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with Express to build the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage a contacts list with features like categorization, search, and sorting, all of which are supported through the implemented REST API.
 
 At present, the back end is hosted on Render, the database on ElephantSQL, and the front end on Railway.
 
@@ -41,10 +41,10 @@ Technologies:
   {
     id: 2,
     name: 'Github Search',
-    description: `This project is a React application developed as part of a mock interview test for a Junior React Developer position. It integrates the GitHub REST API to provide users with an efficient way to search for GitHub users.
+    description: `This project is a React.js application developed as part of a mock interview test for a Junior React.js Developer position. It integrates the GitHub REST API to provide users with an efficient way to search for GitHub users.
 
 Technologies:
-  - React
+  - React.js
   - Styled Components
   - Github REST API`,
     github: 'https://github.com/brunooborges/github-search',
@@ -67,12 +67,12 @@ Technologies:
   {
     id: 4,
     name: 'Multi-step Form',
-    description: `This project is a React application developed using TypeScript as part of the B7Web course. It focuses on creating a simple Multi-Step Form by leveraging the Context API for state management.
+    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. It focuses on creating a simple Multi-Step Form by leveraging the Context API for state management.
 
-    Technologies:
-    - React
-    - TypeScript
-    - Styled Components`,
+Technologies:
+  - React.js
+  - TypeScript
+  - Styled Components`,
     github: 'https://github.com/brunooborges/multi-step-form',
     live: 'https://brunooborges.github.io/multi-step-form/',
     screenshot: [project4],
@@ -80,12 +80,12 @@ Technologies:
   {
     id: 5,
     name: 'Expense Tracker',
-    description: `This project is a React application developed with TypeScript as part of the B7Web course. The primary goal of the application is to create a straightforward Expense Tracker, allowing users to view and manage their expenses on a monthly basis.
+    description: `This project is a React.js application developed with TypeScript as part of the B7Web course. The primary goal of the application is to create a straightforward Expense Tracker, allowing users to view and manage their expenses on a monthly basis.
 
-    Technologies:
-    - React
-    - TypeScript
-    - Styled Components`,
+Technologies:
+  - React.js
+  - TypeScript
+  - Styled Components`,
     github: 'https://github.com/brunooborges/expense-tracker',
     live: 'https://brunooborges.github.io/expense-tracker/',
     screenshot: [project5],
@@ -93,25 +93,25 @@ Technologies:
   {
     id: 6,
     name: 'Memory Game',
-    description: `This project is a React application developed using TypeScript as part of the B7Web course. The main objective of the application is to create an engaging Memory Game, featuring a timer and a reset button for an enjoyable user experience.
+    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. The main objective of the application is to create an engaging Memory Game, featuring a timer and a reset button for an enjoyable user experience.
 
-    Technologies:
-    - React
-    - TypeScript
-    - Styled Components`,
-    github: 'https://github.com/brunooborges/react-memory-game',
-    live: 'https://brunooborges.github.io/react-memory-game/',
+Technologies:
+  - React.js
+  - TypeScript
+  - Styled Components`,
+    github: 'https://github.com/brunooborges/React.js-memory-game',
+    live: 'https://brunooborges.github.io/React.js-memory-game/',
     screenshot: [project6],
   },
   {
     id: 7,
     name: 'To-do List',
-    description: `This project is a React application developed using TypeScript as part of the B7Web course. The main focus of the application is to create a straightforward To-do List, providing users with a practical tool for task management.
+    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. The main focus of the application is to create a straightforward To-do List, providing users with a practical tool for task management.
 
-    Technologies:
-    - React
-    - TypeScript
-    - Styled Components`,
+Technologies:
+  - React.js
+  - TypeScript
+  - Styled Components`,
     github: 'https://github.com/brunooborges/to-do-list',
     live: 'https://brunooborges.github.io/to-do-list/',
     screenshot: [project7],
@@ -119,12 +119,12 @@ Technologies:
   {
     id: 8,
     name: 'My Portfolio',
-    description: `This portfolio is built with React and TypeScript, showcasing my skills and knowledge acquired through dedicated studies and practical application. It serves as a platform to demonstrate my abilities and highlight the projects I've developed to present myself effectively.
+    description: `This portfolio is built with React.js and TypeScript, showcasing my skills and knowledge acquired through dedicated studies and practical application. It serves as a platform to demonstrate my abilities and highlight the projects I've developed to present myself effectively.
 
-    Technologies:
-    - React
-    - TypeScript
-    - Styled Components`,
+Technologies:
+  - React.js
+  - TypeScript
+  - Styled Components`,
     github: 'https://github.com/brunooborges/my-portfolio',
     live: 'https://brunoborges.netlify.app',
     screenshot: [project8],
