@@ -7,15 +7,7 @@ import project1 from '../assets/images/projects-images/mycontacts.png';
 import project3 from '../assets/images/projects-images/tic-tac-toe.png';
 import project7 from '../assets/images/projects-images/to-do-list.png';
 
-interface Project {
-  id: number;
-  name: string;
-  description: string;
-  github: string;
-  github2?: string;
-  live: string;
-  screenshot: any;
-}
+import { type Project } from '../types/Project';
 
 export const projects: Project[] = [
   {

@@ -5,7 +5,9 @@ import prev from '../../../../assets/images/icons/slider-prev.svg';
 
 import { projects } from '../../../../data/projects';
 
-import { Container, Project } from './styles';
+import Projects from '../../../../components/Project';
+
+import { Container } from './styles';
 
 interface PortfolioProps {
   id: string;
@@ -20,10 +22,6 @@ export default function Portfolio(props: PortfolioProps): JSX.Element {
 
   function handleNextSlide(): void {
     setActiveSlide((prevSlide) => (prevSlide < projects.length ? prevSlide + 1 : 1));
-  }
-
-  function handleImageClick(imageUrl: string): void {
-    window.open(imageUrl, '_blank');
   }
 
   return (
@@ -80,64 +78,11 @@ export default function Portfolio(props: PortfolioProps): JSX.Element {
 
       <div className='projects'>
         {projects.map((project) => (
-          <Project
-            data-isactive={project.id === activeSlide}
+          <Projects
+            isActive={project.id === activeSlide}
             key={project.id}
-          >
-            <div className='left-section'>
-              <h1>{project.name}</h1>
-              <p>{project.description}</p>
-              <button
-                className='link-button'
-                type='button'
-              >
-                <a
-                  target='_blank'
-                  href={project.github}
-                  rel='noreferrer'
-                >
-                  Source Code
-                </a>
-              </button>
-              {project.github2 && (
-                <button
-                  className='link-button'
-                  type='button'
-                >
-                  <a
-                    target='_blank'
-                    href={project.github2}
-                    rel='noreferrer'
-                  >
-                    Source Code
-                  </a>
-                </button>
-              )}
-            </div>
-            <div className='right-section'>
-              <div className='bg-effect'>
-                <img
-                  src={project.screenshot}
-                  alt='screenshot'
-                  onClick={() => {
-                    handleImageClick(project.screenshot);
-                  }}
-                />
-              </div>
-              <button
-                className='link-button'
-                type='button'
-              >
-                <a
-                  target='_blank'
-                  href={project.live}
-                  rel='noreferrer'
-                >
-                  Visit website
-                </a>
-              </button>
-            </div>
-          </Project>
+            project={project}
+          />
         ))}
       </div>
     </Container>

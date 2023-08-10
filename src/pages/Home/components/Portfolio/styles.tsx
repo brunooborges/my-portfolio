@@ -136,7 +136,7 @@ export const Container = styled.section`
 
   @media only screen and (max-width: 767px) {
     flex-direction: column-reverse;
-    margin: 24px;
+    margin: auto;
     max-height: 100%;
     padding: 16px;
 
