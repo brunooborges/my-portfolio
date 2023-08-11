@@ -10,10 +10,6 @@ interface Props {
 }
 
 export default function Projects({ project, isActive, onClick }: Props): JSX.Element {
-  // function handleImageClick(imageUrl: string): void {
-  //   window.open(imageUrl, '_blank');
-  // }
-
   return (
     <Container data-isactive={isActive}>
       <div className='left-section'>
@@ -51,9 +47,6 @@ export default function Projects({ project, isActive, onClick }: Props): JSX.Ele
           <img
             src={project.screenshot}
             alt='screenshot'
-            // onClick={() => {
-            //   handleImageClick(project.screenshot);
-            // }}
             onClick={onClick}
           />
         </div>
