@@ -7,15 +7,7 @@ export default function Footer(): JSX.Element {
 
   const loadCounter = async (): Promise<void> => {
     try {
-<<<<<<< HEAD
       console.log(process.env.API_URL);
-
-=======
-<<<<<<< HEAD
-      console.log(process.env.API_URL);
-=======
->>>>>>> c8902f85ca1b954aa991e30f962129d60a6605ca
->>>>>>> 9f089ffe3f566d9a2e9ff6a9422c680733df8ce3
       if (!process.env.API_URL) {
         throw new Error('API URL not defined');
       }
