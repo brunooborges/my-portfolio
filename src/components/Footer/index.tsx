@@ -7,18 +7,15 @@ export default function Footer(): JSX.Element {
 
   const loadCounter = async (): Promise<void> => {
     try {
-      const url = process.env.API_URL;
-      console.log(url);
-      if (!url) {
-        throw new Error('API URL not defined');
-      }
-
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        'https://4ahbvr5oc6.execute-api.sa-east-1.amazonaws.com/prod/visitorcount',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
 
       const json = await res.json();
       setCount(json);
