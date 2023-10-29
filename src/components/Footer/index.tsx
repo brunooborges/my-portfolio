@@ -18,7 +18,7 @@ export default function Footer(): JSX.Element {
       );
 
       const json = await res.json();
-      setCount(json);
+      setCount(json.count);
     } catch (err) {
       console.error('An error occurred during the data retrieval process:', err);
     }
