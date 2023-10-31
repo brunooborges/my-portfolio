@@ -22,7 +22,7 @@ export default function Intro(props: IntroProps): JSX.Element {
     >
       <div className='info'>
         <p>Hi, my name is</p>
-        <h1>Bruno Oliveira</h1>
+        <h1 translate='no'>Bruno Oliveira</h1>
         <h2>Front-End Developer</h2>
         <div>
           <a

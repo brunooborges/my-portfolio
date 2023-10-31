@@ -85,7 +85,7 @@ export default function About(props: AboutProps): JSX.Element {
       </div>
       <div className='techs'>
         <div className='tech bot'>
-          <span>HTML 5</span>
+          <span translate='no'>HTML 5</span>
           <img
             src={html}
             alt='html5'
@@ -93,7 +93,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech top'>
-          <span>CSS 3</span>
+          <span translate='no'>CSS 3</span>
           <img
             src={css}
             alt='css3'
@@ -101,7 +101,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech bot'>
-          <span>JS ES6+</span>
+          <span translate='no'>JS ES6+</span>
           <img
             src={js}
             alt='javascript'
@@ -109,7 +109,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech top'>
-          <span>PHP</span>
+          <span translate='no'>PHP</span>
           <img
             src={php}
             alt='php'
@@ -117,7 +117,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech bot'>
-          <span>EXPRESS</span>
+          <span translate='no'>EXPRESS</span>
           <img
             src={node}
             alt='nodejs'
@@ -125,7 +125,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech top'>
-          <span>REACT</span>
+          <span translate='no'>REACT</span>
           <img
             src={react}
             alt='reactjs'
@@ -133,7 +133,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech bot'>
-          <span>NEXTJS</span>
+          <span translate='no'>NEXTJS</span>
           <img
             src={next}
             alt='nextjs'
@@ -141,7 +141,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech top'>
-          <span>TYPESCRIPT</span>
+          <span translate='no'>TYPESCRIPT</span>
           <img
             src={ts}
             alt='typescript'
@@ -149,7 +149,7 @@ export default function About(props: AboutProps): JSX.Element {
         </div>
 
         <div className='tech bot tailwind'>
-          <span>TAILWIND</span>
+          <span translate='no'>TAILWIND</span>
           <img
             src={tailwind}
             alt='tailwind'

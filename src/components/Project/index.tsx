@@ -13,7 +13,7 @@ export default function Projects({ project, isActive, onClick }: Props): JSX.Ele
   return (
     <Container data-isactive={isActive}>
       <div className='left-section'>
-        <h1>{project.name}</h1>
+        <h1 translate='no'>{project.name}</h1>
         <p>{project.description}</p>
         <button
           className='link-button'
