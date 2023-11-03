@@ -27,7 +27,7 @@ Technologies:
   Links for the Front and Back end:`,
     github: 'https://github.com/brunooborges/mycontacts-front-end',
     github2: 'https://github.com/brunooborges/mycontacts-api',
-    live: 'https://mycontacts.up.railway.app/',
+    live: 'https://brunooborges.github.io/mycontacts-front-end/',
     screenshot: [project1],
   },
   {
