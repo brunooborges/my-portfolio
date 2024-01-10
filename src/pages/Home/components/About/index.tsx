@@ -41,37 +41,42 @@ export default function About(props: AboutProps): JSX.Element {
         <div className='infos'>
           <div className='slide-from-left'>
             <p>
-              Hi, my name is Bruno, and I am a Front-end Developer. I always wanted to study and
-              work with technology and development, but I never had the chance. Now, I{"'"}ve given
-              myself the opportunity to truly pursue this dream. As a result, I began studying
-              programming. Since then, my objective has been to achieve a career transition and work
-              as a Developer.
+              Hi, my name is Bruno, and I am a Front-end Developer.
+              <br /> always wanted to study and work with technology and development, but
+              I never truly had the chance. Now, I{"'"}ve given myself the opportunity to
+              truly pursue this dream. As a result, I began studying programming. Since
+              then, my objective has been to achieve a career transition and work as a
+              Developer.
               <br />
               <br />
-              Although I hold a Bachelor{"'"}s Degree in Civil Engineering, I never felt a sense of
-              belonging in that field because my desire for knowledge and interest in technology far
-              surpassed everything related to civil engineering. I have always been the go-to{' '}
-              {"'IT'"} guy for my family and friends, and better late than never, I realized that
-              this is the path I should follow.
+              Although I hold a Bachelor{"'"}s Degree in Civil Engineering, I never felt a
+              sense of belonging in that field because my desire for knowledge and
+              interest in technology far surpassed everything related to civil
+              engineering. I have always been the go-to {"'IT'"} guy for my family and
+              problem solver for my family and friends, and better late than never, I
+              realized that this is the path I always wanted and I should follow it.
               <br />
               <br />
-              It has been quite challenging taking this new step in my life because there are
-              numerous technologies, programming languages, frameworks, etc., which can sometimes be
-              overwhelming. However, I am successfully navigating through it all with my
-              intelligence. The English I learned at the age of 15 and have continued to use up
-              until today is truly facilitating my learning. It is not an easy journey, but I am
-              thoroughly enjoying it.
+              It has been quite challenging taking this new step in my life because there
+              are numerous technologies, programming languages, frameworks, and
+              non-technology related obstacles, which can sometimes be overwhelming. But,
+              I am successfully navigating through it all with my intelligence, willpower
+              and hardwork. The English I learned at the age of 15 and have continued to
+              hone up until today is truly facilitating my learning. It is not an easy
+              journey, but I am really enjoying it.
               <br />
               <br />
-              Currently, I have been studying to work as a Front-end Developer with a focus on
-              React.js using Next.js, Tailwind, and Typescript. However, I also have knowledge in
-              back-end development, particularly in Node.js and PHP, so I intend to work as a
-              Fullstack Developer in the future.
+              Currently, I have been focusing my work as a Front-end Developer with HTML,
+              CSS, Javascript, and deepeening my knowledge in React.js, Tailwind, and
+              Typescript. However, I also have been studying some back-end development,
+              particularly in Node.js, databases with MySQL and such, and I{"'"}ve studied
+              a little PHP, so I intend to work as a Fullstack Developer in the future.
               <br />
-              <br />I am excited about the possibilities this journey offers and look forward to
-              contributing to innovative projects that enhance user experiences on the web. The
-              challenge of being a Fullstack professional motivates me to continuously learn and
-              become an active and versatile part of the development community.
+              <br />I am excited about the possibilities this journey offers and look
+              forward to contributing to innovative projects that enhance user experiences
+              on the web. The challenge of being a Fullstack professional motivates me to
+              continuously learn and become an active and versatile part of the
+              development community.
             </p>
           </div>
           <div className='slide-from-right'>
