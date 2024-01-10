@@ -42,7 +42,8 @@ export default function About(props: AboutProps): JSX.Element {
           <div className='slide-from-left'>
             <p>
               Hi, my name is Bruno, and I am a Front-end Developer.
-              <br /> always wanted to study and work with technology and development, but
+              <br />
+              <br />I always wanted to study and work with technology and development, but
               I never truly had the chance. Now, I{"'"}ve given myself the opportunity to
               truly pursue this dream. As a result, I began studying programming. Since
               then, my objective has been to achieve a career transition and work as a

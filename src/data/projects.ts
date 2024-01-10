@@ -15,7 +15,7 @@ export const projects: Project[] = [
     name: 'MyContacts',
     description: `This project is a CRUD application created during the JStack course. It leverages Node.js with Express to build the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage a contacts list with features like categorization, search, and sorting, all of which are supported through the implemented REST API.
 
-At present, the back end is hosted on Render, the database on ElephantSQL, and the front end on Railway.
+At present, the back-end is hosted on Render, the database on ElephantSQL, and the front end on Github pages.
 
 Technologies:
   - Node.js with Express
