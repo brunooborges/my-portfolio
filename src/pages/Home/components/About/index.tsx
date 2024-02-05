@@ -7,7 +7,6 @@ import html from '../../../../assets/images/logos/html_logo.png';
 import js from '../../../../assets/images/logos/js_logo.png';
 import next from '../../../../assets/images/logos/nextjs_logo.png';
 import node from '../../../../assets/images/logos/node_logo.png';
-import php from '../../../../assets/images/logos/php_logo.png';
 import react from '../../../../assets/images/logos/react_logo.png';
 import tailwind from '../../../../assets/images/logos/tailwind_logo.png';
 import ts from '../../../../assets/images/logos/ts_logo.png';
@@ -70,8 +69,8 @@ export default function About(props: AboutProps): JSX.Element {
               Currently, I have been focusing my work as a Front-end Developer with HTML,
               CSS, Javascript, and deepeening my knowledge in React.js, Tailwind, and
               Typescript. However, I also have been studying some back-end development,
-              particularly in Node.js, databases with MySQL and such, and I{"'"}ve studied
-              a little PHP, so I intend to work as a Fullstack Developer in the future.
+              particularly in Node.js, databases with MySQL, PostgreSQL, MongoDB ad such,
+              so I intend to work as a Fullstack Developer in the future.
               <br />
               <br />I am excited about the possibilities this journey offers and look
               forward to contributing to innovative projects that enhance user experiences
@@ -111,14 +110,6 @@ export default function About(props: AboutProps): JSX.Element {
           <img
             src={js}
             alt='javascript'
-          />
-        </div>
-
-        <div className='tech top'>
-          <span translate='no'>PHP</span>
-          <img
-            src={php}
-            alt='php'
           />
         </div>
 

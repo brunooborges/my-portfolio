@@ -1,4 +1,4 @@
-import project5 from '../assets/images/projects-images/expense-tracker.png';
+import project5 from '../assets/images/projects-images/fincheck.png';
 import project2 from '../assets/images/projects-images/github-search.png';
 import project6 from '../assets/images/projects-images/memory-game.png';
 import project4 from '../assets/images/projects-images/muilti-step-form.png';
@@ -12,6 +12,30 @@ import { type Project } from '../types/Project';
 export const projects: Project[] = [
   {
     id: 1,
+    name: 'Fincheck',
+    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with NestJS for the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage your personal finances in a simples way by creating accounts, transactions (income or expense), and categories of transactions, all of which are supported through the implemented REST API.
+
+At present, the back-end is hosted on Render, the database on ElephantSQL, and the front end on Github pages.
+
+The base project didn't have any means CRUD functionality for the categories and for the user there were only the create method, so I decided to add this functionalities as well as an option to create transactions with installments.
+
+I'll try to add more features whenever I can think of something new.
+
+Technologies:
+  - Node.js with NestJS
+  - PostgreSQL
+  - Prisma
+  - React.js
+  - TailwindCSS
+
+  Links for the Front and Back end:`,
+    github: 'https://github.com/brunooborges/my-fincheck-frontend',
+    github2: 'https://github.com/brunooborges/my-fincheck-api',
+    live: 'https://brunooborges.github.io/my-fincheck-frontend/',
+    screenshot: [project5],
+  },
+  {
+    id: 2,
     name: 'MyContacts',
     description: `This project is a CRUD application created during the JStack course. It leverages Node.js with Express to build the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage a contacts list with features like categorization, search, and sorting, all of which are supported through the implemented REST API.
 
@@ -31,7 +55,7 @@ Technologies:
     screenshot: [project1],
   },
   {
-    id: 2,
+    id: 3,
     name: 'Github Search',
     description: `This project is a React.js application developed as part of a mock interview test for a Junior React.js Developer position. It integrates the GitHub REST API to provide users with an efficient way to search for GitHub users.
 
@@ -44,7 +68,7 @@ Technologies:
     screenshot: [project2],
   },
   {
-    id: 3,
+    id: 4,
     name: 'Tic-tac-toe',
     description: `This project is a web application created as part of a mock interview test for a Junior JavaScript Developer position. It features a straightforward Tic-tac-toe game with a resettable score functionality.
 
@@ -57,7 +81,7 @@ Technologies:
     screenshot: [project3],
   },
   {
-    id: 4,
+    id: 5,
     name: 'Multi-step Form',
     description: `This project is a React.js application developed using TypeScript as part of the B7Web course. It focuses on creating a simple Multi-Step Form by leveraging the Context API for state management.
 
@@ -68,19 +92,6 @@ Technologies:
     github: 'https://github.com/brunooborges/multi-step-form',
     live: 'https://brunooborges.github.io/multi-step-form/',
     screenshot: [project4],
-  },
-  {
-    id: 5,
-    name: 'Expense Tracker',
-    description: `This project is a React.js application developed with TypeScript as part of the B7Web course. The primary goal of the application is to create a straightforward Expense Tracker, allowing users to view and manage their expenses on a monthly basis.
-
-Technologies:
-  - React.js
-  - TypeScript
-  - Styled Components`,
-    github: 'https://github.com/brunooborges/expense-tracker',
-    live: 'https://brunooborges.github.io/expense-tracker/',
-    screenshot: [project5],
   },
   {
     id: 6,
