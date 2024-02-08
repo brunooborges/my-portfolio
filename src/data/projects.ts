@@ -13,7 +13,7 @@ export const projects: Project[] = [
   {
     id: 1,
     name: 'Fincheck',
-    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with NestJS for the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage your personal finances in a simples way by creating accounts, transactions (income or expense), and categories of transactions, all of which are supported through the implemented REST API.
+    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with NestJS for the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage your personal finances in a simple way by creating accounts, transactions (income or expense), and categories of transactions, all of which are supported through the implemented REST API.
 
 At present, the back-end is hosted on Render, the database on ElephantSQL, and the front end on Github pages.
 
