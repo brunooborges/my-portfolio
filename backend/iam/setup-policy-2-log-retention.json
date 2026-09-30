@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageTheCounterLogGroup",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:PutRetentionPolicy",
+        "logs:DeleteRetentionPolicy",
+        "logs:ListTagsForResource",
+        "logs:TagResource"
+      ],
+      "Resource": [
+        "arn:aws:logs:sa-east-1:<ACCOUNT_ID>:log-group:/aws/lambda/portfolio-visitor-counter",
+        "arn:aws:logs:sa-east-1:<ACCOUNT_ID>:log-group:/aws/lambda/portfolio-visitor-counter:*"
+      ]
+    },
+    {
+      "Sid": "FindLogGroups",
+      "Effect": "Allow",
+      "Action": "logs:DescribeLogGroups",
+      "Resource": "arn:aws:logs:sa-east-1:<ACCOUNT_ID>:log-group:*"
+    },
+    {
+      "Sid": "ReadTheCounterLogs",
+      "Effect": "Allow",
+      "Action": ["logs:GetLogEvents", "logs:FilterLogEvents", "logs:DescribeLogStreams"],
+      "Resource": [
+        "arn:aws:logs:sa-east-1:<ACCOUNT_ID>:log-group:/aws/lambda/portfolio-visitor-counter",
+        "arn:aws:logs:sa-east-1:<ACCOUNT_ID>:log-group:/aws/lambda/portfolio-visitor-counter:*"
+      ]
+    }
+  ]
+}
