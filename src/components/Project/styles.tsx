@@ -155,14 +155,19 @@ export const Container = styled.article`
       align-items: center;
       width: 100%;
       height: auto;
-      background-color: ${({ theme }) => theme.colors.primary.lighter};
+      /* No frame colour or padding: the screenshot itself fills the whole area.
+         A hairline keeps its dark edges readable against the card. */
+      background-color: transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
       transform: scale(0);
       animation: ${scaleRight} 0.7s 0.2s forwards cubic-bezier(0, 1.01, 0.32, 1);
 
       .screenshot-button {
         display: block;
         width: 100%;
-        padding: 8px;
+        padding: 0;
         border: 0;
         background: transparent;
         cursor: zoom-in;
@@ -176,8 +181,66 @@ export const Container = styled.article`
 
         img {
           display: block;
-          height: auto;
           width: 100%;
+          /* One box for every screenshot so the card keeps its height when switching.
+             cover fills it edge to edge; tall screenshots show their top part here and
+             in full when enlarged. */
+          aspect-ratio: 11 / 6;
+          object-fit: cover;
+          object-position: center top;
+        }
+      }
+    }
+
+    .caption {
+      width: 100%;
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 18px;
+      color: ${({ theme }) => theme.colors.text.main};
+    }
+
+    .thumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      margin-top: 12px;
+      list-style: none;
+
+      button {
+        display: block;
+        width: 72px;
+        padding: 0;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        background: ${({ theme }) => theme.colors.primary.lighter};
+        opacity: 0.6;
+        overflow: hidden;
+        transition:
+          opacity 0.2s ease,
+          border-color 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &[aria-pressed='true'] {
+          opacity: 1;
+          border-color: ${({ theme }) => theme.colors.highlight};
+        }
+
+        &:focus-visible {
+          outline: 2px solid ${({ theme }) => theme.colors.text.light};
+          outline-offset: 2px;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          object-fit: cover;
+          object-position: top left;
         }
       }
     }
@@ -185,7 +248,7 @@ export const Container = styled.article`
     .placeholder {
       flex-direction: column;
       gap: 12px;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 11 / 6;
       background: linear-gradient(
         135deg,
         ${({ theme }) => theme.colors.primary.lighter},

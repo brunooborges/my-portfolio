@@ -11,8 +11,11 @@ export interface Project {
   name: string;
   visibility: ProjectVisibility;
   tech: readonly string[];
-  /** Screenshot URL. Projects without cleared media render a designed placeholder. */
-  screenshot?: string;
+  /**
+   * Screenshot URLs, in display order. Multi-image projects need one caption per image in the
+   * locale files (`projects.<slug>.screenshots`). Projects without any render a placeholder.
+   */
+  screenshots?: readonly string[];
   github?: string;
   /** Second repository (e.g. the API next to a front end). */
   github2?: string;

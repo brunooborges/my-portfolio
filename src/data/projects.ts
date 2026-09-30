@@ -1,3 +1,11 @@
+import brmoneyApiTransactions from '../assets/images/projects-images/brmoney/api-transactions.webp';
+import brmoneyDashboard from '../assets/images/projects-images/brmoney/dashboard.webp';
+import gazerDashboard from '../assets/images/projects-images/gazer/dashboard.webp';
+import gazerDirectives from '../assets/images/projects-images/gazer/directives.webp';
+import gazerFeed from '../assets/images/projects-images/gazer/feed.webp';
+import gazerPortfolio from '../assets/images/projects-images/gazer/portfolio.webp';
+import gazerSignin from '../assets/images/projects-images/gazer/signin.webp';
+import gazerStats from '../assets/images/projects-images/gazer/stats.webp';
 import fincheck from '../assets/images/projects-images/fincheck.png';
 import githubSearch from '../assets/images/projects-images/github-search.png';
 import mycontacts from '../assets/images/projects-images/mycontacts.png';
@@ -18,6 +26,7 @@ export const featuredProjects: readonly Project[] = [
     name: 'Gazer',
     visibility: 'private',
     tech: ['Next.js', 'React', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL', 'WebSockets'],
+    screenshots: [gazerDashboard, gazerDirectives, gazerFeed, gazerPortfolio, gazerStats, gazerSignin],
   },
   {
     id: 2,
@@ -25,6 +34,7 @@ export const featuredProjects: readonly Project[] = [
     name: 'BR.Money',
     visibility: 'private',
     tech: ['Next.js', 'React', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL', 'PIX'],
+    screenshots: [brmoneyDashboard, brmoneyApiTransactions],
   },
   {
     id: 3,
@@ -41,7 +51,7 @@ export const featuredProjects: readonly Project[] = [
     name: 'Fincheck',
     visibility: 'public',
     tech: ['React', 'TypeScript', 'Tailwind', 'NestJS', 'Prisma', 'PostgreSQL'],
-    screenshot: fincheck,
+    screenshots: [fincheck],
     github: `${GITHUB}/my-fincheck-frontend`,
     github2: `${GITHUB}/my-fincheck-api`,
     live: `${PAGES}/my-fincheck-frontend/`,
@@ -52,7 +62,7 @@ export const featuredProjects: readonly Project[] = [
     name: 'MyContacts',
     visibility: 'public',
     tech: ['React', 'styled-components', 'Node.js', 'Express', 'PostgreSQL'],
-    screenshot: mycontacts,
+    screenshots: [mycontacts],
     github: `${GITHUB}/mycontacts-front-end`,
     github2: `${GITHUB}/mycontacts-api`,
     live: `${PAGES}/mycontacts-front-end/`,
@@ -63,7 +73,7 @@ export const featuredProjects: readonly Project[] = [
     name: 'Github Search',
     visibility: 'public',
     tech: ['React', 'TypeScript', 'GitHub REST API'],
-    screenshot: githubSearch,
+    screenshots: [githubSearch],
     github: `${GITHUB}/github-search`,
     live: `${PAGES}/github-search/`,
   },

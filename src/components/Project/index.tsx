@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useTranslatedList from '../../hooks/useTranslatedList';
@@ -13,11 +14,16 @@ const EXTERNAL_REL = 'noopener noreferrer';
 
 export default function ProjectCard({ project, onOpenImage }: ProjectCardProps): React.JSX.Element {
   const { t } = useTranslation();
-  const { slug, name, visibility, tech, screenshot, github, github2, live } = project;
+  const { slug, name, visibility, tech, screenshots = [], github, github2, live } = project;
 
   const summary = t(`projects.${slug}.summary`);
   const highlightList = useTranslatedList(`projects.${slug}.highlights`);
+  const captions = useTranslatedList(`projects.${slug}.screenshots`);
+  const [activeImage, setActiveImage] = useState(0);
   const enlargeLabel = t('portfolio.openImage', { name });
+  const captionOf = (index: number): string => captions[index] ?? t('portfolio.screenshotAlt', { name });
+  const hasGallery = screenshots.length > 1;
+  const currentImage = screenshots[activeImage];
   const hasTwoRepos = github2 !== undefined;
 
   return (
@@ -80,22 +86,52 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
       </div>
 
       <div className='right-section'>
-        {screenshot !== undefined ? (
-          <div className='bg-effect'>
-            <button
-              type='button'
-              className='screenshot-button'
-              aria-label={enlargeLabel}
-              onClick={() => {
-                onOpenImage(screenshot, t('portfolio.screenshotAlt', { name }));
-              }}
-            >
-              <img
-                src={screenshot}
-                alt=''
-              />
-            </button>
-          </div>
+        {currentImage !== undefined ? (
+          <>
+            <div className='bg-effect'>
+              <button
+                type='button'
+                className='screenshot-button'
+                aria-label={enlargeLabel}
+                onClick={() => {
+                  onOpenImage(currentImage, captionOf(activeImage));
+                }}
+              >
+                <img
+                  src={currentImage}
+                  alt=''
+                />
+              </button>
+            </div>
+
+            {hasGallery && (
+              <>
+                <p className='caption'>{captionOf(activeImage)}</p>
+                <ul
+                  className='thumbs'
+                  aria-label={t('portfolio.screenshotsLabel')}
+                >
+                  {screenshots.map((image, index) => (
+                    <li key={image}>
+                      <button
+                        type='button'
+                        aria-label={captionOf(index)}
+                        aria-pressed={index === activeImage}
+                        onClick={() => {
+                          setActiveImage(index);
+                        }}
+                      >
+                        <img
+                          src={image}
+                          alt=''
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </>
         ) : (
           <div
             className='bg-effect placeholder'

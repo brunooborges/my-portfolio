@@ -86,6 +86,33 @@ describe('projects data', () => {
     }
   });
 
+  it('gives Gazer and BR.Money real screenshots, in the agreed order and count', () => {
+    const gazer = projects.find((project) => project.slug === 'gazer');
+    const brmoney = projects.find((project) => project.slug === 'brmoney');
+
+    expect(gazer?.screenshots).toHaveLength(6);
+    expect(brmoney?.screenshots).toHaveLength(2);
+  });
+
+  it('never reuses the same image twice within a project', () => {
+    for (const project of projects) {
+      const images = project.screenshots ?? [];
+      expect(new Set(images).size, project.slug).toBe(images.length);
+    }
+  });
+
+  it('describes every screenshot of a multi-image project in every locale', () => {
+    for (const [code, locale] of Object.entries(locales)) {
+      for (const project of projects.filter((item) => (item.screenshots?.length ?? 0) > 1)) {
+        const entry = (locale.projects as Record<string, { screenshots?: string[] }>)[project.slug];
+        expect(entry?.screenshots, `${code} ${project.slug}`).toHaveLength(project.screenshots?.length ?? 0);
+        for (const caption of entry?.screenshots ?? []) {
+          expect(caption.trim(), `${code} ${project.slug}`).not.toBe('');
+        }
+      }
+    }
+  });
+
   it('lists at least one technology per featured project', () => {
     for (const project of featuredProjects) {
       expect(project.tech.length, project.slug).toBeGreaterThan(0);

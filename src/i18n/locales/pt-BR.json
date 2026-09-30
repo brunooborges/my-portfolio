@@ -35,6 +35,7 @@
     "next": "Próximo projeto",
     "counter": "Projeto {{current}} de {{total}}",
     "openImage": "Ampliar captura de tela de {{name}}",
+    "screenshotsLabel": "Capturas de tela",
     "screenshotAlt": "Captura de tela de {{name}}",
     "companyProject": "Projeto de empresa",
     "companyProjectNote": "Código privado, portanto sem links para o código-fonte ou para o site.",
@@ -51,7 +52,8 @@
   },
   "modal": {
     "close": "Fechar imagem",
-    "title": "Visualização da imagem"
+    "title": "Visualização da imagem",
+    "imageArea": "Captura de tela, role para ver por inteiro"
   },
   "footer": {
     "credit": "Projetado e desenvolvido por Bruno Borges",
@@ -60,6 +62,14 @@
   "projects": {
     "gazer": {
       "summary": "Uma plataforma de análise de mercados de previsão com IA, construída de ponta a ponta por mim.",
+      "screenshots": [
+        "Dashboard com valor do portfólio, posições abertas e desempenho.",
+        "Tabela de diretivas de IA com recomendação, nível de confiança e status por mercado.",
+        "Feed de eventos com volume e liquidez, filtrado por categoria.",
+        "Portfólio com posições, histórico de ordens e saldos.",
+        "Estatísticas pessoais: volume, taxa de acerto e P&L realizado.",
+        "Tela de login com o lema do produto."
+      ],
       "highlights": [
         "Dashboard em Next.js e React com mais de 170 componentes reutilizáveis.",
         "Atualizações de preço em tempo real em menos de 100ms.",
@@ -68,6 +78,10 @@
     },
     "brmoney": {
       "summary": "Um gateway de pagamentos B2B multi-tenant para PIX e cripto, construído na Sysdev Techstrategy & Consulting.",
+      "screenshots": [
+        "Dashboard administrativo com saldo líquido, depósitos, saques e últimas transações.",
+        "Tabela de transações da API com status, taxas, valor líquido e filtros."
+      ],
       "highlights": [
         "Dashboard administrativo que reduziu em cerca de 70% o tempo de onboarding de lojistas.",
         "Backend em NestJS e Prisma com 40 módulos.",

@@ -169,6 +169,93 @@ describe('Portfolio', () => {
     expect(activeProjectName()).toBe('BR.Money');
   });
 
+  describe('screenshot gallery', () => {
+    it('shows Gazer with a caption and one thumbnail per screenshot instead of a placeholder', () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+      const card = within(activeProject());
+
+      const thumbs = card.getByRole('list', { name: 'Screenshots' });
+      expect(within(thumbs).getAllByRole('button')).toHaveLength(6);
+      expect(card.getByText(/Dashboard with portfolio value/)).toBeInTheDocument();
+      expect(card.queryByRole('img', { name: 'Screenshots coming soon' })).toBeNull();
+    });
+
+    it('marks the first thumbnail as the current one', () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+      const thumbs = within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+
+      expect(thumbs[0]).toHaveAttribute('aria-pressed', 'true');
+      expect(thumbs[1]).toHaveAttribute('aria-pressed', 'false');
+    });
+
+    it('switches the shown screenshot and its caption when a thumbnail is chosen', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      const thumbs = within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+
+      await user.click(thumbs[2]);
+
+      expect(thumbs[2]).toHaveAttribute('aria-pressed', 'true');
+      expect(thumbs[0]).toHaveAttribute('aria-pressed', 'false');
+      expect(within(activeProject()).getByText(/Events feed with volume and liquidity/)).toBeInTheDocument();
+      expect(within(activeProject()).queryByText(/Dashboard with portfolio value/)).toBeNull();
+    });
+
+    it('opens the modal with the chosen screenshot and its caption as the description', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      const thumbs = within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+      await user.click(thumbs[1]);
+
+      await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Gazer' }));
+
+      const dialog = screen.getByRole('dialog', { name: 'Image preview' });
+      expect(within(dialog).getByRole('img', { name: /AI directives table/ })).toBeInTheDocument();
+    });
+
+    it('starts from the first screenshot again when returning to a project', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      await user.click(within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button')[3]);
+
+      await user.click(screen.getByRole('button', { name: 'Next project' }));
+      await user.click(screen.getByRole('button', { name: 'Previous project' }));
+
+      const thumbs = within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+      expect(thumbs[0]).toHaveAttribute('aria-pressed', 'true');
+    });
+
+    it('gives BR.Money two screenshots', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      await user.click(screen.getByRole('button', { name: 'Next project' }));
+
+      expect(activeProjectName()).toBe('BR.Money');
+      expect(within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button')).toHaveLength(2);
+      expect(within(activeProject()).getByText(/Admin dashboard with net balance/)).toBeInTheDocument();
+    });
+
+    it('shows no thumbnails or caption for a single-screenshot project', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      await user.click(screen.getByRole('button', { name: 'Previous project' }));
+
+      expect(activeProjectName()).toBe('Github Search');
+      expect(within(activeProject()).queryByRole('list', { name: 'Screenshots' })).toBeNull();
+      expect(within(activeProject()).getByRole('button', { name: 'Enlarge screenshot of Github Search' })).toBeInTheDocument();
+    });
+
+    it('translates the captions and the thumbnail list', async () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      await i18n.changeLanguage('pt-BR');
+
+      expect(await screen.findByRole('list', { name: 'Capturas de tela' })).toBeInTheDocument();
+      expect(within(activeProject()).getByText(/Dashboard com valor do portfólio/)).toBeInTheDocument();
+    });
+  });
+
   describe('image modal', () => {
     async function openFincheckImage(): Promise<ReturnType<typeof userEvent.setup>> {
       const user = userEvent.setup();
@@ -210,15 +297,67 @@ describe('Portfolio', () => {
       expect(within(dialog).getByRole('img', { name: 'Screenshot of Fincheck' })).toBeInTheDocument();
     });
 
-    it('moves focus to the close button on open and keeps it there on Tab', async () => {
+    it('moves focus to the close button on open and cycles between it and the image area on Tab', async () => {
       const user = await openFincheckImage();
       const close = screen.getByRole('button', { name: 'Close image' });
+      const imageArea = screen.getByRole('region', { name: /scroll to see all of it/i });
 
       expect(close).toHaveFocus();
       await user.tab();
+      expect(imageArea).toHaveFocus();
+      await user.tab();
       expect(close).toHaveFocus();
       await user.tab({ shift: true });
+      expect(imageArea).toHaveFocus();
+      await user.tab({ shift: true });
       expect(close).toHaveFocus();
+    });
+
+    it('keeps focus inside the dialog while tabbing', async () => {
+      const user = await openFincheckImage();
+      const dialog = screen.getByRole('dialog');
+
+      for (let step = 0; step < 6; step += 1) {
+        await user.tab();
+        expect(dialog).toContainElement(document.activeElement as HTMLElement);
+      }
+    });
+
+    it('makes the image area scrollable by keyboard so tall screenshots can be seen in full', async () => {
+      await openFincheckImage();
+
+      const imageArea = screen.getByRole('region', { name: /scroll to see all of it/i });
+
+      expect(imageArea).toHaveAttribute('tabindex', '0');
+      expect(within(imageArea).getByRole('img', { name: 'Screenshot of Fincheck' })).toBeInTheDocument();
+    });
+
+    it('does not close when the image itself is clicked, so it can be scrolled and dragged', async () => {
+      const user = await openFincheckImage();
+
+      await user.click(screen.getByRole('img', { name: 'Screenshot of Fincheck' }));
+
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('closes when the dark area around the image is clicked', async () => {
+      const user = await openFincheckImage();
+
+      await user.click(screen.getByRole('region', { name: /scroll to see all of it/i }));
+
+      expect(screen.queryByRole('dialog')).toBeNull();
+    });
+
+    it('describes the scrollable area in Portuguese too', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      await i18n.changeLanguage('pt-BR');
+      await user.click(screen.getByRole('button', { name: 'Próximo projeto' }));
+      await user.click(screen.getByRole('button', { name: 'Próximo projeto' }));
+      await user.click(screen.getByRole('button', { name: 'Próximo projeto' }));
+      await user.click(screen.getByRole('button', { name: 'Ampliar captura de tela de Fincheck' }));
+
+      expect(screen.getByRole('region', { name: /role para ver por inteiro/i })).toBeInTheDocument();
     });
 
     it('returns focus to the screenshot button that opened it', async () => {

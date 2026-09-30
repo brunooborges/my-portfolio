@@ -32,6 +32,9 @@ yarn-error.log*
 .env.*
 !.env.example
 
+# Full-size original screenshots (the optimized .webp versions next to them are committed)
+src/assets/images/projects-images/*/*.png
+
 # AWS SAM build output
 .aws-sam/
 samconfig.toml
