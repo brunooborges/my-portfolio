@@ -81,6 +81,16 @@ export const Container = styled.header<ContainerProps>`
         animation: ${logoBigger} 0.2s ease-out forwards;
       `};
   }
+
+  .language {
+    position: absolute;
+    top: 36px;
+    right: 40px;
+
+    @media only screen and (max-width: 635px) {
+      display: none;
+    }
+  }
 `;
 
 export const Menu = styled.nav`

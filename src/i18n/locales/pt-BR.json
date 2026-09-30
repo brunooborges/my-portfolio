@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Bruno Borges - Desenvolvedor Full-Stack",
+    "description": "Bruno Borges, Desenvolvedor Full-Stack que adora construir ótimas experiências de usuário."
+  },
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "portfolio": "Portfólio",
+    "menu": "Menu",
+    "main": "Principal",
+    "mobile": "Menu móvel",
+    "language": "Idioma"
+  },
+  "intro": {
+    "greeting": "Olá, meu nome é",
+    "role": "Desenvolvedor Full-Stack",
+    "linkedin": "Perfil no LinkedIn",
+    "github": "Perfil no GitHub"
+  },
+  "about": {
+    "title": "Sobre",
+    "photoAlt": "Retrato de Bruno Borges",
+    "stackLabel": "Stack principal",
+    "paragraphs": [
+      "Olá, eu sou o Bruno, um Desenvolvedor Full-Stack que adora construir ótimas experiências de usuário.",
+      "Por cerca de dois anos e meio, trabalhei remotamente na Sysdev Techstrategy & Consulting, onde comecei como desenvolvedor front-end e evoluí para full-stack com entregas consistentes. No Gazer, uma plataforma de análise de mercados de previsão com IA, construí o produto inteiro sozinho: um dashboard em Next.js e React com mais de 170 componentes reutilizáveis e atualizações de preço em tempo real em menos de 100ms, sustentado por uma API NestJS de 21 módulos. No BR.Money, um gateway de pagamentos B2B multi-tenant para PIX e cripto, construí o dashboard administrativo que reduziu em cerca de 70% o tempo de onboarding de lojistas, junto com o backend em NestJS e Prisma de 40 módulos por trás dele.",
+      "Pelo caminho, aprendi a me importar com o que faz um software parecer confiável: código limpo e bem testado (mais de 90% de cobertura), estados claros de carregamento, erro e nova tentativa, e interfaces que continuam utilizáveis quando a rede ou uma API não colabora. Também estou cursando tecnologia em Análise e Desenvolvimento de Sistemas e continuo construindo projetos paralelos, como o Foodiary, um analista de dieta com IA serverless na AWS que construí ao longo do curso JStack Lab. Meu inglês, que comecei a aprender aos 15 anos e venho aprimorando desde então, é fluente.",
+      "Minha stack principal é TypeScript, React, Next.js, Node.js com NestJS e PostgreSQL. Estou buscando minha próxima oportunidade em um time que construa produtos que as pessoas realmente gostem de usar, onde eu possa continuar crescendo ao lado de ótimos engenheiros e assumir a responsabilidade real pelo que entrego."
+    ]
+  },
+  "portfolio": {
+    "title": "Portfólio",
+    "previous": "Projeto anterior",
+    "next": "Próximo projeto",
+    "counter": "Projeto {{current}} de {{total}}",
+    "openImage": "Ampliar captura de tela de {{name}}",
+    "screenshotAlt": "Captura de tela de {{name}}",
+    "companyProject": "Projeto de empresa",
+    "companyProjectNote": "Código privado, portanto sem links para o código-fonte ou para o site.",
+    "placeholderMedia": "Capturas de tela em breve",
+    "visitWebsite": "Visitar site",
+    "sourceCode": "Código-fonte",
+    "sourceCodeFrontend": "Código do front end",
+    "sourceCodeBackend": "Código do back end",
+    "highlights": "Destaques",
+    "technologies": "Tecnologias",
+    "experimentsTitle": "Mais experimentos",
+    "live": "Ao vivo",
+    "source": "Código"
+  },
+  "modal": {
+    "close": "Fechar imagem",
+    "title": "Visualização da imagem"
+  },
+  "footer": {
+    "credit": "Projetado e desenvolvido por Bruno Borges",
+    "visitors": "Visitantes: {{visitors}}"
+  },
+  "projects": {
+    "gazer": {
+      "summary": "Uma plataforma de análise de mercados de previsão com IA, construída de ponta a ponta por mim.",
+      "highlights": [
+        "Dashboard em Next.js e React com mais de 170 componentes reutilizáveis.",
+        "Atualizações de preço em tempo real em menos de 100ms.",
+        "Sustentado por uma API NestJS de 21 módulos."
+      ]
+    },
+    "brmoney": {
+      "summary": "Um gateway de pagamentos B2B multi-tenant para PIX e cripto, construído na Sysdev Techstrategy & Consulting.",
+      "highlights": [
+        "Dashboard administrativo que reduziu em cerca de 70% o tempo de onboarding de lojistas.",
+        "Backend em NestJS e Prisma com 40 módulos.",
+        "Integrações com provedores de pagamento PIX e cripto."
+      ]
+    },
+    "foodiary": {
+      "summary": "Um analista de dieta com IA serverless: registre uma refeição e receba a análise nutricional. Construído na AWS ao longo do curso JStack Lab.",
+      "highlights": [
+        "Fotos e áudios das refeições vão para o S3, entram numa fila SQS e são analisados por IA em uma Lambda em segundo plano.",
+        "Cadastro e login com JWT, além de metas de calorias e macros calculadas por usuário.",
+        "App em Expo e React Native com Expo Router, NativeWind e TanStack Query."
+      ]
+    },
+    "fincheck": {
+      "summary": "Um app de finanças pessoais com contas, transações e categorias. Construído a partir do projeto de um curso da JStack, com funcionalidades adicionadas por mim.",
+      "highlights": [
+        "Minhas adições ao projeto do curso: CRUD de categorias e parcelamentos.",
+        "API NestJS com PostgreSQL e Prisma, front end em React e Tailwind."
+      ]
+    },
+    "mycontacts": {
+      "summary": "Um gerenciador de contatos com API REST, construído durante um curso da JStack.",
+      "highlights": [
+        "API em Node.js e Express com PostgreSQL.",
+        "Front end em React estilizado com styled-components."
+      ]
+    },
+    "github-search": {
+      "summary": "Busque usuários do GitHub e navegue pelos repositórios deles. Criado como exercício de uma entrevista técnica simulada.",
+      "highlights": [
+        "Front end em React consumindo a API REST do GitHub.",
+        "Trata estados de carregamento, vazio e erro."
+      ]
+    },
+    "tic-tac-toe": {
+      "summary": "Jogo da velha."
+    },
+    "memory-game": {
+      "summary": "Jogo da memória feito com React."
+    },
+    "multi-step-form": {
+      "summary": "Formulário em várias etapas com validação."
+    },
+    "to-do-list": {
+      "summary": "App de lista de tarefas."
+    }
+  }
+}

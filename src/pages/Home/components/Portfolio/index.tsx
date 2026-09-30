@@ -1,112 +1,195 @@
-import React, { useState } from 'react';
+import { useCallback, useState, type KeyboardEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import next from '../../../../assets/images/icons/slider-next.svg';
 import prev from '../../../../assets/images/icons/slider-prev.svg';
 
-import { projects } from '../../../../data/projects';
-
-import Projects from '../../../../components/Project';
-
 import Modal from '../../../../components/Modal';
-import { Container } from './styles';
+import ProjectCard from '../../../../components/Project';
+import { experimentProjects, featuredProjects } from '../../../../data/projects';
+
+import { Experiments, Section, Showcase } from './styles';
 
 interface PortfolioProps {
   id: string;
 }
 
-export default function Portfolio(props: PortfolioProps): JSX.Element {
-  const [activeSlide, setActiveSlide] = useState(1);
-  const [showModal, setShowModal] = useState(false);
-  const [imageOfModal, setImageOfModal] = useState('');
+interface ModalImage {
+  src: string;
+  alt: string;
+}
 
-  function openModal(): void {
-    setShowModal(true);
+const EXTERNAL_REL = 'noopener noreferrer';
+
+function pad(value: number): string {
+  return value < 10 ? `0${value}` : String(value);
+}
+
+export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
+  const { t } = useTranslation();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [modalImage, setModalImage] = useState<ModalImage | null>(null);
+
+  const total = featuredProjects.length;
+  const activeProject = featuredProjects[activeIndex];
+  const position = activeIndex + 1;
+
+  const handlePrevSlide = useCallback((): void => {
+    setActiveIndex((index) => (index > 0 ? index - 1 : total - 1));
+  }, [total]);
+
+  const handleNextSlide = useCallback((): void => {
+    setActiveIndex((index) => (index < total - 1 ? index + 1 : 0));
+  }, [total]);
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
+    if (event.key === 'ArrowRight') {
+      handleNextSlide();
+    } else if (event.key === 'ArrowLeft') {
+      handlePrevSlide();
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      setActiveIndex(0);
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      setActiveIndex(total - 1);
+    }
   }
 
-  function closeModal(): void {
-    setShowModal(false);
-  }
-
-  function handlePrevSlide(): void {
-    setActiveSlide((prevSlide) => (prevSlide > 1 ? prevSlide - 1 : projects.length));
-  }
-
-  function handleNextSlide(): void {
-    setActiveSlide((prevSlide) => (prevSlide < projects.length ? prevSlide + 1 : 1));
-  }
+  const closeModal = useCallback((): void => {
+    setModalImage(null);
+  }, []);
 
   return (
-    <Container className='portfolio'>
-      <div className='slider'>
-        <div className='slider-carousel'>
-          <div className='slider-counter'>
-            <span className='slide-number'>
-              {activeSlide < 10 ? `0${activeSlide}` : activeSlide}
-            </span>
+    <Section
+      id={id}
+      aria-labelledby={`${id}-title`}
+    >
+      <h2
+        id={`${id}-title`}
+        className='sr-only'
+      >
+        {t('portfolio.title')}
+      </h2>
+
+      <Showcase>
+        <div
+          className='slider'
+          onKeyDown={handleKeyDown}
+        >
+          <div
+            className='slider-carousel'
+            aria-hidden='true'
+          >
+            <div className='slider-counter'>
+              <span className='slide-number'>{pad(position)}</span>
+            </div>
+            <div className='slider-navigator'>
+              {featuredProjects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className={index === activeIndex ? 'active-slide' : ''}
+                />
+              ))}
+            </div>
           </div>
-          <nav className='slider-navigator'>
-            {projects.map((slide) => (
-              <div
-                key={slide.id}
-                className={slide.id === activeSlide ? 'active-slide' : ''}
-                data-nav={slide.id}
+
+          <div className='slider-next-prev'>
+            <button
+              type='button'
+              className='prev-slide'
+              aria-label={t('portfolio.previous')}
+              onClick={handlePrevSlide}
+            >
+              <img
+                src={prev}
+                alt=''
               />
-            ))}
-          </nav>
-        </div>
-        <div className='slider-next-prev'>
-          <div
-            className='prev-slide'
-            onClick={handlePrevSlide}
-          >
-            <img
-              src={prev}
-              alt=''
-            />
-          </div>
+            </button>
 
-          <div className='slides-counter'>
-            <span className='current-slide'>
-              {activeSlide < 10 ? `0${activeSlide}` : activeSlide}
-            </span>
-            /
-            <span className='total-slide'>
-              {projects.length < 10 ? `0${projects.length}` : projects.length}
-            </span>
-          </div>
+            <div
+              className='slides-counter'
+              aria-hidden='true'
+            >
+              <span className='current-slide'>{pad(position)}</span>/<span className='total-slide'>{pad(total)}</span>
+            </div>
+            <p
+              role='status'
+              className='sr-only'
+            >
+              {t('portfolio.counter', { current: position, total })}
+            </p>
 
-          <div
-            className='next-slide'
-            onClick={handleNextSlide}
-          >
-            <img
-              src={next}
-              alt=''
-            />
+            <button
+              type='button'
+              className='next-slide'
+              aria-label={t('portfolio.next')}
+              onClick={handleNextSlide}
+            >
+              <img
+                src={next}
+                alt=''
+              />
+            </button>
           </div>
         </div>
-      </div>
 
-      <div className='projects'>
-        {projects.map((project) => (
-          <Projects
-            isActive={project.id === activeSlide}
-            key={project.id}
-            project={project}
-            onClick={() => {
-              openModal();
-              setImageOfModal(project.screenshot);
+        <div className='projects'>
+          <ProjectCard
+            key={activeProject.id}
+            project={activeProject}
+            onOpenImage={(src, alt) => {
+              setModalImage({ src, alt });
             }}
           />
-        ))}
-      </div>
+        </div>
+      </Showcase>
 
-      {showModal && (
+      <Experiments aria-labelledby={`${id}-experiments`}>
+        <h3 id={`${id}-experiments`}>{t('portfolio.experimentsTitle')}</h3>
+        <ul>
+          {experimentProjects.map((project) => (
+            <li key={project.id}>
+              <span
+                className='name'
+                translate='no'
+              >
+                {project.name}
+              </span>
+              <span className='links'>
+                {project.live !== undefined && (
+                  <a
+                    href={project.live}
+                    target='_blank'
+                    rel={EXTERNAL_REL}
+                    aria-label={`${project.name}: ${t('portfolio.live')}`}
+                  >
+                    {t('portfolio.live')}
+                  </a>
+                )}
+                {project.github !== undefined && (
+                  <a
+                    href={project.github}
+                    target='_blank'
+                    rel={EXTERNAL_REL}
+                    aria-label={`${project.name}: ${t('portfolio.source')}`}
+                  >
+                    {t('portfolio.source')}
+                  </a>
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Experiments>
+
+      {modalImage !== null && (
         <Modal
-          image={imageOfModal}
+          image={modalImage.src}
+          alt={modalImage.alt}
           closeModal={closeModal}
         />
       )}
-    </Container>
+    </Section>
   );
 }

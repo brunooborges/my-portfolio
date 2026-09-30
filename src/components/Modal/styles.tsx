@@ -1,4 +1,4 @@
-import { keyframes, styled } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const scaleUp = keyframes`
 100% {
@@ -29,14 +29,26 @@ export const Container = styled.div`
 
   .closer {
     position: fixed;
-    top: 50px;
-    right: 100px;
-    width: 40px;
-    height: 40px;
+    top: 40px;
+    right: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
     cursor: pointer;
     color: #fff;
-    font-size: 60px;
-    z-index: 99999;
+    font-size: 48px;
+    line-height: 1;
+    z-index: 100000;
+
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.colors.highlight};
+      outline-offset: 2px;
+    }
   }
 
   @media only screen and (max-width: 1260px) {

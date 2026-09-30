@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
@@ -10,6 +10,11 @@
 
 # production
 /build
+/dist
+.next
+
+# tooling
+*.tsbuildinfo
 
 # misc
 .DS_Store
@@ -21,3 +26,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# env files
+.env
+.env.*
+!.env.example
+
+# AWS SAM build output
+.aws-sam/
+samconfig.toml
+
+backend/dist/

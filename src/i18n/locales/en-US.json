@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Bruno Borges - Full-Stack Developer",
+    "description": "Bruno Borges, a Full-Stack Developer who loves building great user experiences."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "menu": "Menu",
+    "main": "Main",
+    "mobile": "Mobile menu",
+    "language": "Language"
+  },
+  "intro": {
+    "greeting": "Hi, my name is",
+    "role": "Full-Stack Developer",
+    "linkedin": "LinkedIn profile",
+    "github": "GitHub profile"
+  },
+  "about": {
+    "title": "About",
+    "photoAlt": "Portrait of Bruno Borges",
+    "stackLabel": "Core stack",
+    "paragraphs": [
+      "Hi, I'm Bruno, a Full-Stack Developer who loves building great user experiences.",
+      "For about two and a half years, I worked remotely at Sysdev Techstrategy & Consulting, where I started as a front-end developer and grew into full-stack through consistent delivery. On Gazer, an AI-powered prediction market analysis platform, I built the whole product on my own: a Next.js and React dashboard with 170+ reusable components and real-time price updates in under 100ms, backed by a 21-module NestJS API. On BR.Money, a multi-tenant B2B payment gateway for PIX and crypto, I built the admin dashboard that cut merchant onboarding time by about 70%, along with the 40-module NestJS and Prisma backend behind it.",
+      "Along the way, I learned to care about what makes software feel reliable: clean, well-tested code (90%+ coverage), clear loading, error and retry states, and interfaces that stay usable when the network or an API doesn't cooperate. I'm also pursuing an associate degree in Systems Analysis and Development, and I keep building on the side, like Foodiary, a serverless AI diet analyst on AWS that I built while following the JStack Lab course. My English, which I started learning at 15 and have sharpened ever since, is fluent.",
+      "My core stack is TypeScript, React, Next.js, Node.js with NestJS, and PostgreSQL. I'm looking for my next opportunity on a team building products people actually enjoy using, where I can keep growing alongside great engineers and take real ownership of what I ship."
+    ]
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "previous": "Previous project",
+    "next": "Next project",
+    "counter": "Project {{current}} of {{total}}",
+    "openImage": "Enlarge screenshot of {{name}}",
+    "screenshotAlt": "Screenshot of {{name}}",
+    "companyProject": "Company project",
+    "companyProjectNote": "Private code, so no source or live links.",
+    "placeholderMedia": "Screenshots coming soon",
+    "visitWebsite": "Visit website",
+    "sourceCode": "Source code",
+    "sourceCodeFrontend": "Front end code",
+    "sourceCodeBackend": "Back end code",
+    "highlights": "Highlights",
+    "technologies": "Technologies",
+    "experimentsTitle": "More experiments",
+    "live": "Live",
+    "source": "Source"
+  },
+  "modal": {
+    "close": "Close image",
+    "title": "Image preview"
+  },
+  "footer": {
+    "credit": "Designed & Built by Bruno Borges",
+    "visitors": "Visitors: {{visitors}}"
+  },
+  "projects": {
+    "gazer": {
+      "summary": "An AI-powered prediction market analysis platform, built end to end by me.",
+      "highlights": [
+        "Next.js and React dashboard with 170+ reusable components.",
+        "Real-time price updates in under 100ms.",
+        "Backed by a 21-module NestJS API."
+      ]
+    },
+    "brmoney": {
+      "summary": "A multi-tenant B2B payment gateway for PIX and crypto, built at Sysdev Techstrategy & Consulting.",
+      "highlights": [
+        "Admin dashboard that cut merchant onboarding time by about 70%.",
+        "40-module NestJS and Prisma backend.",
+        "Integrations with PIX and crypto payment providers."
+      ]
+    },
+    "foodiary": {
+      "summary": "A serverless AI diet analyst: log a meal and get its nutrition breakdown. Built on AWS while following the JStack Lab course.",
+      "highlights": [
+        "Meal photos and audio are uploaded to S3, queued on SQS and analyzed by AI in a background Lambda.",
+        "Sign-up and sign-in with JWT, plus calorie and macro goals calculated per user.",
+        "Expo and React Native app with Expo Router, NativeWind and TanStack Query."
+      ]
+    },
+    "fincheck": {
+      "summary": "A personal finance app with accounts, transactions and categories. Started from a JStack course project and extended with my own features.",
+      "highlights": [
+        "My additions to the course project: categories CRUD and installments.",
+        "NestJS API with PostgreSQL and Prisma, React and Tailwind front end."
+      ]
+    },
+    "mycontacts": {
+      "summary": "A contacts manager with a REST API, built while following a JStack course.",
+      "highlights": [
+        "Node.js and Express API with PostgreSQL.",
+        "React front end styled with styled-components."
+      ]
+    },
+    "github-search": {
+      "summary": "Search GitHub users and browse their repositories. Built as a mock technical-interview exercise.",
+      "highlights": [
+        "React front end consuming the GitHub REST API.",
+        "Handles loading, empty and error states."
+      ]
+    },
+    "tic-tac-toe": {
+      "summary": "Tic-tac-toe game."
+    },
+    "memory-game": {
+      "summary": "Memory card game built with React."
+    },
+    "multi-step-form": {
+      "summary": "Multi-step form with validation."
+    },
+    "to-do-list": {
+      "summary": "To-do list app."
+    }
+  }
+}

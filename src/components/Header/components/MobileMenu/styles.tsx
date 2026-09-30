@@ -1,11 +1,11 @@
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   'data-isopen'?: boolean;
 }
 
 export const MenuMobile = styled.div`
-  button {
+  > button {
     display: none;
     width: 54px;
     height: 54px;
@@ -75,6 +75,10 @@ export const SideBar = styled.div<ContainerProps>`
     &:hover {
       color: ${({ theme }) => theme.colors.highlight};
     }
+  }
+
+  .language {
+    margin-top: 24px;
   }
 `;
 
