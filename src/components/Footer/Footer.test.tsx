@@ -1,4 +1,5 @@
 import { act, screen, waitFor } from '@testing-library/react';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import { afterEach, vi } from 'vitest';
 
 import i18n from '../../i18n';
@@ -46,10 +47,48 @@ describe('Footer', () => {
     ).toBeInTheDocument();
   });
 
+  describe('revealing the counter', () => {
+    it('counts the visit on load but keeps the number hidden until the footer scrolls into view', async () => {
+      const fetchMock = mockFetchJson({ count: 1234, counted: true });
+      renderWithProviders(<Footer />);
+      await settle();
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(screen.queryByText(/Visitors/)).toBeNull();
+
+      mockAllIsIntersecting(true);
+
+      expect(await screen.findByText(/Visitors: 1,234$/)).toBeInTheDocument();
+    });
+
+    it('keeps the number once revealed, even after scrolling away again', async () => {
+      mockFetchJson({ count: 9, counted: true });
+      renderWithProviders(<Footer />);
+      await settle();
+      mockAllIsIntersecting(true);
+      expect(await screen.findByText(/Visitors: 9$/)).toBeInTheDocument();
+
+      mockAllIsIntersecting(false);
+
+      expect(screen.getByText(/Visitors: 9$/)).toBeInTheDocument();
+    });
+
+    it('never shows a number the API did not provide, even when the footer is visible', async () => {
+      mockFetchJson({ other: 1 });
+      renderWithProviders(<Footer />);
+      await settle();
+
+      mockAllIsIntersecting(true);
+
+      expect(screen.queryByText(/Visitors/)).toBeNull();
+    });
+  });
+
   describe('counting visitors', () => {
     it('registers a new visitor once with a generated id and shows the formatted count', async () => {
       const fetchMock = mockFetchJson({ count: 1234, counted: true });
       renderWithProviders(<Footer />);
+      mockAllIsIntersecting(true);
 
       expect(await screen.findByText(/Visitors: 1,234$/)).toBeInTheDocument();
       expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -92,6 +131,7 @@ describe('Footer', () => {
       });
       const fetchMock = mockFetchJson({ count: 77 });
       renderWithProviders(<Footer />);
+      mockAllIsIntersecting(true);
 
       expect(await screen.findByText(/Visitors: 77$/)).toBeInTheDocument();
       const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
@@ -157,6 +197,7 @@ describe('Footer', () => {
   it('translates the labels and formats the number for the language', async () => {
     mockFetchJson({ count: 1234, counted: true });
     renderWithProviders(<Footer />);
+    mockAllIsIntersecting(true);
     await i18n.changeLanguage('pt-BR');
 
     expect(await screen.findByText(/Visitantes: 1\.234$/)).toBeInTheDocument();

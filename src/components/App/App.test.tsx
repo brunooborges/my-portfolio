@@ -1,5 +1,6 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import { vi } from 'vitest';
 
 import i18n from '../../i18n';
@@ -37,6 +38,18 @@ describe('App', () => {
     expect(within(nav).getByRole('link', { name: 'Portfolio' })).toHaveAttribute('href', '#portfolio');
   });
 
+  it('scrolls to the section in the address when the site is opened on a direct link', () => {
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    window.location.hash = '#portfolio';
+
+    const { container } = renderWithProviders(<App />);
+
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView.mock.contexts[0]).toBe(container.querySelector('#portfolio'));
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
   it('links to the social profiles safely', () => {
     renderWithProviders(<App />);
 
@@ -63,6 +76,7 @@ describe('App', () => {
 
   it('shows the visitor counter in the footer', async () => {
     renderWithProviders(<App />);
+    mockAllIsIntersecting(true);
 
     expect(await screen.findByText(/Visitors: 3$/)).toBeInTheDocument();
   });
