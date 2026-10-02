@@ -111,7 +111,7 @@ export const Menu = styled.nav`
   align-items: center;
   float: left;
   height: 110px;
-  max-width: 260px;
+  max-width: 300px;
   width: 100%;
   margin-left: 30px;
 

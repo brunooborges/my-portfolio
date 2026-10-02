@@ -33,6 +33,10 @@ button {
   scroll-margin-top: 100px;
 }
 
+#contact {
+  scroll-margin-top: 90px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

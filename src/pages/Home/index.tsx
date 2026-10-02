@@ -1,4 +1,5 @@
 import About from './components/About';
+import Contact from './components/Contact';
 import Intro from './components/Intro';
 import Portfolio from './components/Portfolio';
 
@@ -10,6 +11,7 @@ export default function Home(): React.JSX.Element {
       <Intro id='intro' />
       <About id='about' />
       <Portfolio id='portfolio' />
+      <Contact id='contact' />
     </Container>
   );
 }

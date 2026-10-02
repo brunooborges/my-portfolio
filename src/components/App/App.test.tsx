@@ -22,7 +22,7 @@ describe('App', () => {
   it('renders every section with the ids the navigation scrolls to', () => {
     const { container } = renderWithProviders(<App />);
 
-    for (const id of ['intro', 'about', 'portfolio']) {
+    for (const id of ['intro', 'about', 'portfolio', 'contact']) {
       expect(container.querySelector(`#${id}`), id).toBeInTheDocument();
     }
     expect(screen.getByRole('heading', { level: 1, name: 'Bruno Borges' })).toBeInTheDocument();
@@ -36,6 +36,7 @@ describe('App', () => {
     expect(within(nav).getByRole('link', { name: 'Home' })).toHaveAttribute('href', '#intro');
     expect(within(nav).getByRole('link', { name: 'About' })).toHaveAttribute('href', '#about');
     expect(within(nav).getByRole('link', { name: 'Portfolio' })).toHaveAttribute('href', '#portfolio');
+    expect(within(nav).getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '#contact');
   });
 
   it('scrolls to the section in the address when the site is opened on a direct link', () => {

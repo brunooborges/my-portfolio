@@ -46,6 +46,7 @@ describe('MobileMenu', () => {
     renderWithProviders(<MobileMenu />);
 
     expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '#about');
+    expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '#contact');
     expect(screen.getByLabelText('Mobile menu', { selector: 'nav' })).toBeInTheDocument();
   });
 

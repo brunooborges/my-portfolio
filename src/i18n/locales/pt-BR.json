@@ -7,6 +7,7 @@
     "home": "Início",
     "about": "Sobre",
     "portfolio": "Portfólio",
+    "contact": "Contato",
     "menu": "Menu",
     "main": "Principal",
     "mobile": "Menu móvel",
@@ -28,6 +29,11 @@
       "Pelo caminho, aprendi a me importar com o que faz um software parecer confiável: código limpo e bem testado (mais de 90% de cobertura), estados claros de carregamento, erro e nova tentativa, e interfaces que continuam utilizáveis quando a rede ou uma API não colabora. Também estou cursando tecnologia em Análise e Desenvolvimento de Sistemas e continuo construindo projetos paralelos, como o Foodiary, um analista de dieta com IA serverless na AWS que construí ao longo do curso JStack Lab. Meu inglês, que comecei a aprender aos 15 anos e venho aprimorando desde então, é fluente.",
       "Minha stack principal é TypeScript, React, Next.js, Node.js com NestJS e PostgreSQL. Estou buscando minha próxima oportunidade em um time que construa produtos que as pessoas realmente gostem de usar, onde eu possa continuar crescendo ao lado de ótimos engenheiros e assumir a responsabilidade real pelo que entrego."
     ]
+  },
+  "contact": {
+    "title": "Contato",
+    "intro": "Estou disponível para novas oportunidades. O jeito mais rápido de falar comigo é por e-mail, ou você pode me encontrar no LinkedIn e no GitHub.",
+    "resume": "Baixar currículo (PDF)"
   },
   "portfolio": {
     "title": "Portfólio",
