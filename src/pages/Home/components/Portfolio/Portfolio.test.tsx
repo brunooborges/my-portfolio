@@ -108,7 +108,7 @@ describe('Portfolio', () => {
     expect(screen.getByRole('link', { name: 'Visit website' })).toHaveAttribute('rel', expect.stringContaining('noopener'));
   });
 
-  it('shows Foodiary with front end and API links, a placeholder and no website link', async () => {
+  it('shows Foodiary with front end and API links and no website link', async () => {
     const user = userEvent.setup();
     renderWithProviders(<Portfolio id='portfolio' />);
 
@@ -234,6 +234,76 @@ describe('Portfolio', () => {
       expect(activeProjectName()).toBe('BR.Money');
       expect(within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button')).toHaveLength(2);
       expect(within(activeProject()).getByText(/Admin dashboard with net balance/)).toBeInTheDocument();
+    });
+
+    describe('Foodiary (portrait phone screenshots)', () => {
+      async function goToFoodiary(): Promise<ReturnType<typeof userEvent.setup>> {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+        await user.click(screen.getByRole('button', { name: 'Next project' }));
+        await user.click(screen.getByRole('button', { name: 'Next project' }));
+        return user;
+      }
+
+      it('shows five screenshots with captions instead of a placeholder', async () => {
+        await goToFoodiary();
+        const card = within(activeProject());
+
+        expect(activeProjectName()).toBe('Foodiary');
+        expect(within(card.getByRole('list', { name: 'Screenshots' })).getAllByRole('button')).toHaveLength(5);
+        expect(card.getByText(/Welcome screen/)).toBeInTheDocument();
+        expect(card.queryByRole('img', { name: 'Screenshots coming soon' })).toBeNull();
+      });
+
+      it('marks the card as portrait so the frame fits a phone screen', async () => {
+        await goToFoodiary();
+
+        expect(activeProject()).toHaveAttribute('data-orientation', 'portrait');
+      });
+
+      it('leaves landscape projects in the landscape frame', () => {
+        renderWithProviders(<Portfolio id='portfolio' />);
+
+        expect(activeProject()).toHaveAttribute('data-orientation', 'landscape');
+      });
+
+      it('opens the enlarged view in portrait mode with the chosen caption', async () => {
+        const user = await goToFoodiary();
+        await user.click(within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button')[3]);
+
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Foodiary' }));
+
+        const dialog = screen.getByRole('dialog', { name: 'Image preview' });
+        expect(dialog).toHaveAttribute('data-orientation', 'portrait');
+        expect(within(dialog).getByRole('img', { name: /Home screen/ })).toBeInTheDocument();
+      });
+
+      it('ends on the AI meal breakdown, with the food-by-food nutrition', async () => {
+        const user = await goToFoodiary();
+        const thumbs = within(screen.getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+
+        await user.click(thumbs[4]);
+
+        expect(thumbs[4]).toHaveAttribute('aria-pressed', 'true');
+        expect(within(activeProject()).getByText(/Meal detail with the nutrition breakdown/)).toBeInTheDocument();
+      });
+
+      it('keeps the enlarged view of a landscape project in landscape mode', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Gazer' }));
+
+        expect(screen.getByRole('dialog')).toHaveAttribute('data-orientation', 'landscape');
+      });
+
+      it('translates the captions', async () => {
+        await goToFoodiary();
+
+        await i18n.changeLanguage('pt-BR');
+
+        expect(await within(activeProject()).findByText(/Tela de boas-vindas/)).toBeInTheDocument();
+      });
     });
 
     it('shows no thumbnails or caption for a single-screenshot project', async () => {

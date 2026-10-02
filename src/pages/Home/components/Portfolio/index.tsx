@@ -7,6 +7,7 @@ import prev from '../../../../assets/images/icons/slider-prev.svg';
 import Modal from '../../../../components/Modal';
 import ProjectCard from '../../../../components/Project';
 import { experimentProjects, featuredProjects } from '../../../../data/projects';
+import { type ScreenshotOrientation } from '../../../../types/Project';
 
 import { Experiments, Section, Showcase } from './styles';
 
@@ -17,6 +18,7 @@ interface PortfolioProps {
 interface ModalImage {
   src: string;
   alt: string;
+  orientation: ScreenshotOrientation;
 }
 
 const EXTERNAL_REL = 'noopener noreferrer';
@@ -139,7 +141,7 @@ export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
             key={activeProject.id}
             project={activeProject}
             onOpenImage={(src, alt) => {
-              setModalImage({ src, alt });
+              setModalImage({ src, alt, orientation: activeProject.screenshotOrientation ?? 'landscape' });
             }}
           />
         </div>
@@ -187,6 +189,7 @@ export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
         <Modal
           image={modalImage.src}
           alt={modalImage.alt}
+          orientation={modalImage.orientation}
           closeModal={closeModal}
         />
       )}

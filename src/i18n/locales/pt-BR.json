@@ -90,6 +90,13 @@
     },
     "foodiary": {
       "summary": "Um analista de dieta com IA serverless: registre uma refeição e receba a análise nutricional. Construído na AWS ao longo do curso JStack Lab.",
+      "screenshots": [
+        "Tela de boas-vindas com o lema e a entrada para o cadastro.",
+        "Etapa do cadastro: escolha do objetivo (perder, manter ou ganhar peso).",
+        "Etapa do cadastro: nível de atividade, usado para estimar as necessidades calóricas.",
+        "Tela inicial com o progresso diário de calorias e macros, a refeição registrada e os botões de registro por voz e foto.",
+        "Detalhe da refeição com a análise nutricional: calorias e macros da refeição inteira e de cada alimento."
+      ],
       "highlights": [
         "Fotos e áudios das refeições vão para o S3, entram numa fila SQS e são analisados por IA em uma Lambda em segundo plano.",
         "Cadastro e login com JWT, além de metas de calorias e macros calculadas por usuário.",

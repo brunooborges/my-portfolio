@@ -272,6 +272,37 @@ export const Container = styled.article`
     }
   }
 
+  /* Phone screenshots: a narrow, tall frame with the same aspect ratio as the images, so they
+     are shown whole and edge to edge instead of being cropped into the landscape box. */
+  &[data-orientation='portrait'] .right-section {
+    .bg-effect {
+      width: min(100%, 250px);
+    }
+
+    .screenshot-button img {
+      aspect-ratio: 590 / 1204;
+      object-position: center;
+    }
+
+    .caption {
+      max-width: 340px;
+      text-align: center;
+    }
+
+    .thumbs {
+      justify-content: center;
+
+      button {
+        width: 44px;
+
+        img {
+          aspect-ratio: 590 / 1204;
+          object-position: center;
+        }
+      }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .left-section,
     .right-section .bg-effect,

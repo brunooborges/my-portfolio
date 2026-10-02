@@ -94,6 +94,19 @@ describe('projects data', () => {
     expect(brmoney?.screenshots).toHaveLength(2);
   });
 
+  it('gives Foodiary five portrait phone screenshots', () => {
+    const foodiary = projects.find((project) => project.slug === 'foodiary');
+
+    expect(foodiary?.screenshots).toHaveLength(5);
+    expect(foodiary?.screenshotOrientation).toBe('portrait');
+  });
+
+  it('treats every other project as landscape', () => {
+    for (const project of projects.filter((item) => item.slug !== 'foodiary')) {
+      expect(project.screenshotOrientation ?? 'landscape', project.slug).toBe('landscape');
+    }
+  });
+
   it('never reuses the same image twice within a project', () => {
     for (const project of projects) {
       const images = project.screenshots ?? [];

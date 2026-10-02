@@ -15,7 +15,8 @@ export const Container = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
-    padding: 24px;
+    --modal-padding: 24px;
+    padding: var(--modal-padding);
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 99999;
 
@@ -34,6 +35,14 @@ export const Container = styled.div`
       transform: scale(0);
       animation: ${scaleUp} 0.5s 0.3s forwards cubic-bezier(0, 1.01, 0.32, 1);
     }
+  }
+
+  /* A phone screenshot is taller than wide: fit it to the screen height so it shows whole. */
+  &[data-orientation='portrait'] .image-background img {
+    width: auto;
+    max-width: 100%;
+    height: calc(100vh - 2 * var(--modal-padding));
+    height: calc(100dvh - 2 * var(--modal-padding));
   }
 
   .closer {
@@ -62,7 +71,7 @@ export const Container = styled.div`
 
   @media only screen and (max-width: 1260px) {
     .image-background {
-      padding: 16px;
+      --modal-padding: 16px;
 
       img {
         width: 92vw;

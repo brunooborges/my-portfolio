@@ -1,15 +1,18 @@
 import { useEffect, useRef, type MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { type ScreenshotOrientation } from '../../types/Project';
 import { Container } from './styles';
 
 interface ModalProps {
   image: string;
   alt: string;
+  /** `portrait` fits a tall phone screenshot to the screen height instead of scrolling it. */
+  orientation?: ScreenshotOrientation;
   closeModal: () => void;
 }
 
-export default function Modal({ image, alt, closeModal }: ModalProps): React.JSX.Element {
+export default function Modal({ image, alt, orientation = 'landscape', closeModal }: ModalProps): React.JSX.Element {
   const { t } = useTranslation();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const imageAreaRef = useRef<HTMLDivElement>(null);
@@ -70,6 +73,7 @@ export default function Modal({ image, alt, closeModal }: ModalProps): React.JSX
       role='dialog'
       aria-modal='true'
       aria-label={t('modal.title')}
+      data-orientation={orientation}
     >
       <div
         ref={imageAreaRef}

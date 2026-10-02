@@ -34,6 +34,7 @@ yarn-error.log*
 
 # Full-size original screenshots (the optimized .webp versions next to them are committed)
 src/assets/images/projects-images/*/*.png
+src/assets/images/projects-images/*/*.jpeg
 
 # AWS SAM build output
 .aws-sam/

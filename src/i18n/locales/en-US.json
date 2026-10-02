@@ -90,6 +90,13 @@
     },
     "foodiary": {
       "summary": "A serverless AI diet analyst: log a meal and get its nutrition breakdown. Built on AWS while following the JStack Lab course.",
+      "screenshots": [
+        "Welcome screen with the tagline and the sign-up entry point.",
+        "Onboarding step: choosing a goal (lose, maintain or gain weight).",
+        "Onboarding step: activity level, used to estimate calorie needs.",
+        "Home screen with calorie and macro progress for the day, the logged meal and the voice and photo logging buttons.",
+        "Meal detail with the nutrition breakdown: calories and macros for the whole meal and for each food."
+      ],
       "highlights": [
         "Meal photos and audio are uploaded to S3, queued on SQS and analyzed by AI in a background Lambda.",
         "Sign-up and sign-in with JWT, plus calorie and macro goals calculated per user.",

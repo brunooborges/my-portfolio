@@ -1,5 +1,10 @@
 import brmoneyApiTransactions from '../assets/images/projects-images/brmoney/api-transactions.webp';
 import brmoneyDashboard from '../assets/images/projects-images/brmoney/dashboard.webp';
+import foodiaryActivity from '../assets/images/projects-images/foodiary/activity.webp';
+import foodiaryDashboard from '../assets/images/projects-images/foodiary/dashboard.webp';
+import foodiaryGoal from '../assets/images/projects-images/foodiary/goal.webp';
+import foodiaryMeal from '../assets/images/projects-images/foodiary/meal.webp';
+import foodiaryWelcome from '../assets/images/projects-images/foodiary/welcome.webp';
 import gazerDashboard from '../assets/images/projects-images/gazer/dashboard.webp';
 import gazerDirectives from '../assets/images/projects-images/gazer/directives.webp';
 import gazerFeed from '../assets/images/projects-images/gazer/feed.webp';
@@ -16,8 +21,8 @@ const PAGES = 'https://brunooborges.github.io';
 
 /**
  * Featured projects, shown in the slider. Company projects (Gazer, BR.Money)
- * are private: no repository or live links, and no `screenshot` until cleared
- * media is added to `src/assets/images/projects-images/`.
+ * are private: no repository or live links, only cleared screenshots from
+ * `src/assets/images/projects-images/`.
  */
 export const featuredProjects: readonly Project[] = [
   {
@@ -42,6 +47,8 @@ export const featuredProjects: readonly Project[] = [
     name: 'Foodiary',
     visibility: 'public',
     tech: ['React Native', 'Expo', 'TypeScript', 'AWS Lambda', 'S3', 'SQS', 'PostgreSQL', 'OpenAI'],
+    screenshots: [foodiaryWelcome, foodiaryGoal, foodiaryActivity, foodiaryDashboard, foodiaryMeal],
+    screenshotOrientation: 'portrait',
     github: `${GITHUB}/foodiary-frontend`,
     github2: `${GITHUB}/foodiary-api`,
   },

@@ -14,7 +14,8 @@ const EXTERNAL_REL = 'noopener noreferrer';
 
 export default function ProjectCard({ project, onOpenImage }: ProjectCardProps): React.JSX.Element {
   const { t } = useTranslation();
-  const { slug, name, visibility, tech, screenshots = [], github, github2, live } = project;
+  const { slug, name, visibility, tech, screenshots = [], screenshotOrientation = 'landscape', github, github2, live } =
+    project;
 
   const summary = t(`projects.${slug}.summary`);
   const highlightList = useTranslatedList(`projects.${slug}.highlights`);
@@ -27,7 +28,7 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
   const hasTwoRepos = github2 !== undefined;
 
   return (
-    <Container>
+    <Container data-orientation={screenshotOrientation}>
       <div className='left-section'>
         <h3 translate='no'>{name}</h3>
         {visibility === 'private' && (
