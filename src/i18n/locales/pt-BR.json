@@ -39,6 +39,80 @@
     "intro": "Estou disponível para novas oportunidades. O jeito mais rápido de falar comigo é por e-mail, ou você pode me encontrar no LinkedIn e no GitHub.",
     "resume": "Baixar currículo (PDF)"
   },
+  "caseStudy": {
+    "open": "Estudo de caso",
+    "close": "Fechar estudo de caso",
+    "problem": "O problema",
+    "role": "Meu papel",
+    "flow": "Como funciona",
+    "flowLabel": "Como funciona, passo a passo",
+    "outcome": "O resultado"
+  },
+  "caseStudies": {
+    "gazer": {
+      "problem": "Os mercados de previsão se movem rápido e são milhares. O Gazer os analisa com IA e mostra preços ao vivo, para que traders encontrem, acompanhem e operem os mercados que importam para eles, sem sair do Gazer.",
+      "role": "Construí o produto inteiro sozinho: o dashboard em Next.js e a API em NestJS por trás dele.",
+      "flowTitles": [
+        "Dashboard",
+        "API",
+        "Preços ao vivo",
+        "Operar sem sair do Gazer",
+        "Tarefas em segundo plano",
+        "Cobrança",
+        "Dados"
+      ],
+      "flowDetails": [
+        "Next.js e React com mais de 170 componentes reutilizáveis. O que cada assinante vê depende do plano.",
+        "Uma API NestJS de 21 módulos. O login usa JWT e quatro níveis de assinatura são aplicados no servidor, então o navegador nunca libera mais do que o plano permite.",
+        "Um gateway Socket.IO envia preços ao vivo e atualizações do livro de ofertas ao dashboard. Ele reconecta sozinho e monitora a própria latência, mantendo as atualizações de tela abaixo de 100 ms.",
+        "Os usuários podem operar nos mercados da Polymarket (ou de outras plataformas de mercados de previsão) sem nunca sair do Gazer. Tudo o que o Gazer precisa é de um gateway de trading, como o BR.Money para a Polymarket, que cuida da carteira e das ordens, então todo o caminho da análise até a operação fica em um único app.",
+        "Filas Bull e Redis trazem milhares de mercados e análises escritas por IA em segundo plano, com novas tentativas e espera crescente, respeitando os limites das APIs externas.",
+        "Um motor de cobrança que funciona com mais de um provedor de pagamento cobre todo o ciclo da assinatura: checkout, renovações, trocas de plano, cancelamentos e reembolsos.",
+        "PostgreSQL com Prisma guarda mercados, análises, usuários e assinaturas."
+      ],
+      "outcome": "Atualizações de tela em menos de 100 ms, cerca de 50% menos trabalho manual de cobrança e um caminho completo da análise por IA até a operação, tudo dentro do Gazer."
+    },
+    "brmoney": {
+      "problem": "Empresas que querem aceitar pagamentos PIX e em cripto precisam de um gateway que possam revender com a própria marca. O BR.Money é esse gateway, e os lojistas se conectam a ele por uma API.",
+      "role": "Construí o dashboard administrativo que reduziu em cerca de 70% o tempo de onboarding de lojistas, e o backend de 40 módulos em NestJS e Prisma por trás dele.",
+      "flowTitles": [
+        "Marca, lojista, cliente",
+        "Acesso restrito",
+        "Dinheiro exato",
+        "API e webhooks para lojistas",
+        "Uma ordem por vez",
+        "Dashboard administrativo"
+      ],
+      "flowDetails": [
+        "Três níveis: um provedor opera a própria instância com marca própria, os lojistas se cadastram nela e os clientes dos lojistas são quem paga.",
+        "Toda requisição é limitada ao próprio provedor e lojista no código, com papéis definindo quem pode ver e alterar o quê.",
+        "Os valores são guardados e calculados como decimais exatos, nunca como números de ponto flutuante, e viram números comuns só na borda da API.",
+        "Os lojistas se conectam pela API, e os resultados dos pagamentos chegam aos sistemas deles por webhooks que tentam de novo com espera exponencial.",
+        "Ordens que gastam um saldo, incluindo as operações na Polymarket que o Gazer envia, rodam uma por vez em uma fila, então o mesmo dinheiro nunca pode ser gasto duas vezes.",
+        "Um dashboard administrativo em Next.js para operadores e lojistas. É a parte que reduziu em cerca de 70% o tempo de onboarding de lojistas."
+      ],
+      "outcome": "Tempo de onboarding de lojistas reduzido em cerca de 70% pelo dashboard administrativo."
+    },
+    "foodiary": {
+      "problem": "Anotar cada refeição é cansativo. O Foodiary deixa você fotografar a refeição ou dizer o que comeu e a transforma em calorias e macros sem digitar.",
+      "role": "Construído ao acompanhar o curso JStack Lab: o app em React Native e a API serverless na AWS por trás dele.",
+      "flowTitles": [
+        "Pedir o envio",
+        "Enviar ao S3",
+        "Enfileirar o trabalho",
+        "Analisar com IA",
+        "Salvar o resultado"
+      ],
+      "flowDetails": [
+        "A API confere o tipo e o tamanho do arquivo e se o usuário concordou com o processamento por IA, cria a refeição como “uploading” e devolve um link de envio pré-assinado de curta duração.",
+        "O app envia a foto ou o áudio direto ao S3. O link assina o tamanho do arquivo, então o S3 recusa um envio diferente do que foi conferido.",
+        "Quando o arquivo chega, o S3 aciona uma função que coloca a refeição numa fila SQS. Mensagens com falha vão para uma fila de mensagens mortas (dead-letter) em vez de se perderem.",
+        "Uma Lambda acionada pela fila muda a refeição de “uploading” para “processing” em uma única atualização condicional, então só um worker pode chamar a IA paga. Ela confere o consentimento de novo e pede ao modelo de IA que identifique os alimentos e seus macros.",
+        "Alimentos, calorias e macros são salvos no PostgreSQL (Drizzle) e a refeição vira “success” ou “failed”. O app lê o resultado pela API."
+      ],
+      "outcome": "A API responde na hora e a etapa lenta da IA roda em segundo plano, então a refeição passa por uploading, processing e success ou failed sem nunca travar o app."
+    }
+  },
   "portfolio": {
     "title": "Portfólio",
     "previous": "Projeto anterior",
@@ -84,6 +158,7 @@
         "Tela de login com o lema do produto."
       ],
       "highlights": [
+        "Os usuários podem operar na Polymarket (ou em outras plataformas) sem sair do app, por meio de um gateway de trading.",
         "Dashboard em Next.js e React com mais de 170 componentes reutilizáveis.",
         "Atualizações de preço em tempo real em menos de 100ms.",
         "Sustentado por uma API NestJS de 21 módulos."

@@ -135,6 +135,28 @@ export const Container = styled.article`
       }
     }
 
+    .case-study-button {
+      margin-top: 24px;
+      padding: 8px 24px;
+      border: 2px solid ${({ theme }) => theme.colors.accent};
+      border-radius: 23px;
+      background: transparent;
+      color: ${({ theme }) => theme.colors.text.light};
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.primary.lighter};
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.text.light};
+        outline-offset: 3px;
+      }
+    }
+
     .links {
       display: flex;
       flex-wrap: wrap;

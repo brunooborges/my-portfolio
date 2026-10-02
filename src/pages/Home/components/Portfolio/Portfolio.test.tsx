@@ -80,6 +80,17 @@ describe('Portfolio', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Project 1 of 6');
   });
 
+  it('leads the Gazer card with what the product does: trading without leaving the app', () => {
+    renderWithProviders(<Portfolio id='portfolio' />);
+
+    const highlights = within(within(activeProject()).getByRole('list', { name: 'Highlights' })).getAllByRole('listitem');
+
+    expect(highlights).toHaveLength(4);
+    expect(highlights[0]).toHaveTextContent(
+      /trade on Polymarket \(or other platforms\) without leaving the app, through a trading gateway/,
+    );
+  });
+
   it('marks company projects as private and offers no source or live links', () => {
     renderWithProviders(<Portfolio id='portfolio' />);
 
