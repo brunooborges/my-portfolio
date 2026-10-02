@@ -40,7 +40,7 @@ export default function Header(): React.JSX.Element {
         </a>
       </Menu>
 
-      <div className='language'>
+      <div className='header-language'>
         <LanguageSwitcher />
       </div>
 

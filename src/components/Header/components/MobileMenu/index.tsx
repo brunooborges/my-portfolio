@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import close from '../../../../assets/images/icons/close-menu.svg';
 import menu from '../../../../assets/images/icons/menu-icon.svg';
 
-import LanguageSwitcher from '../../../LanguageSwitcher';
 import useMobileMenu from './useMobileMenu';
 
 import { MenuMobile, Overlay, SideBar } from './styles';
@@ -56,9 +55,6 @@ export default function MobileMenu(): React.JSX.Element {
             >
               <span>{t('nav.portfolio')}</span>
             </a>
-            <div className='language'>
-              <LanguageSwitcher />
-            </div>
           </SideBar>
         </nav>
       </MenuMobile>

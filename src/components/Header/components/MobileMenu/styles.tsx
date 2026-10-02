@@ -17,7 +17,8 @@ export const MenuMobile = styled.div`
     float: right;
     right: 30px;
     top: 30px;
-    z-index: 9999;
+    /* Above the open sidebar (9999), so the same button stays visible there as its close button. */
+    z-index: 10000;
     cursor: pointer;
 
     img {
@@ -75,10 +76,6 @@ export const SideBar = styled.div<ContainerProps>`
     &:hover {
       color: ${({ theme }) => theme.colors.highlight};
     }
-  }
-
-  .language {
-    margin-top: 24px;
   }
 `;
 

@@ -82,13 +82,24 @@ export const Container = styled.header<ContainerProps>`
       `};
   }
 
-  .language {
+  .header-language {
     position: absolute;
     top: 36px;
     right: 40px;
 
+    /* On phones the main menu collapses into the hamburger, but the switcher stays in the bar,
+       just left of the menu button (54px wide, 30px from the edge). */
     @media only screen and (max-width: 635px) {
-      display: none;
+      top: 40px;
+      right: 96px;
+    }
+
+    /* Very narrow phones: tighter buttons so the switcher clears the logo. */
+    @media only screen and (max-width: 360px) {
+      button {
+        min-width: 32px;
+        padding: 6px 8px;
+      }
     }
   }
 `;

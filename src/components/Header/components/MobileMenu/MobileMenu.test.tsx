@@ -93,16 +93,22 @@ describe('MobileMenu', () => {
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('stays open when using the language switcher inside the menu', async () => {
+  it('leaves the language switcher to the header bar, so it is not duplicated in the menu', () => {
+    renderWithProviders(<MobileMenu />);
+
+    expect(screen.queryByRole('group', { name: 'Language', hidden: true })).toBeNull();
+  });
+
+  it('keeps the menu button above the open sidebar, so it stays visible as a close button', async () => {
     const user = userEvent.setup();
     renderWithProviders(<MobileMenu />);
     const toggle = getToggle();
     await user.click(toggle);
 
-    await user.click(screen.getByText('PT'));
+    const toggleLayer = Number(window.getComputedStyle(toggle).zIndex);
+    const sidebarLayer = Number(window.getComputedStyle(getSidebar()).zIndex);
 
-    expect(i18n.resolvedLanguage).toBe('pt-BR');
-    expect(getToggle()).toHaveAttribute('aria-expanded', 'true');
+    expect(toggleLayer).toBeGreaterThan(sidebarLayer);
   });
 
   it('closes when the window grows past the mobile breakpoint', async () => {
