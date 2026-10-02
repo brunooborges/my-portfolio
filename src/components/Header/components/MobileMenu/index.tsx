@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-scroll';
+import { useId } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import close from '../../../../assets/images/icons/close-menu.svg';
 import menu from '../../../../assets/images/icons/menu-icon.svg';
@@ -8,54 +8,53 @@ import useMobileMenu from './useMobileMenu';
 
 import { MenuMobile, Overlay, SideBar } from './styles';
 
-export default function MobileMenu(): JSX.Element {
-  const { isOpen, menuRef, toggleMenu } = useMobileMenu();
+export default function MobileMenu(): React.JSX.Element {
+  const { t } = useTranslation();
+  const { isOpen, menuRef, toggleRef, toggleMenu } = useMobileMenu();
+  const sidebarId = useId();
 
   return (
     <>
       {isOpen && <Overlay data-isopen={isOpen} />}
       <MenuMobile ref={menuRef}>
         <button
+          ref={toggleRef}
           type='button'
           onClick={toggleMenu}
+          aria-label={t('nav.menu')}
+          aria-expanded={isOpen}
+          aria-controls={sidebarId}
         >
           <img
             src={isOpen ? close : menu}
-            alt='mobile-menu'
+            alt=''
           />
         </button>
-        <nav>
+        <nav aria-label={t('nav.mobile')}>
           <SideBar
+            id={sidebarId}
             data-isopen={isOpen}
+            inert={!isOpen}
             className='mobile-menu'
           >
-            <Link
-              to='intro'
-              smooth={false}
-              duration={500}
-              offset={-50}
+            <a
+              href='#intro'
               onClick={toggleMenu}
             >
-              <span>Home</span>
-            </Link>
-            <Link
-              to='about'
-              smooth={false}
-              duration={500}
-              offset={-90}
+              <span>{t('nav.home')}</span>
+            </a>
+            <a
+              href='#about'
               onClick={toggleMenu}
             >
-              <span>About</span>
-            </Link>
-            <Link
-              to='portfolio'
-              smooth={false}
-              duration={500}
-              offset={-100}
+              <span>{t('nav.about')}</span>
+            </a>
+            <a
+              href='#portfolio'
               onClick={toggleMenu}
             >
-              <span>Portfolio</span>
-            </Link>
+              <span>{t('nav.portfolio')}</span>
+            </a>
           </SideBar>
         </nav>
       </MenuMobile>

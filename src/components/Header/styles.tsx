@@ -81,6 +81,28 @@ export const Container = styled.header<ContainerProps>`
         animation: ${logoBigger} 0.2s ease-out forwards;
       `};
   }
+
+  .header-language {
+    position: absolute;
+    top: 36px;
+    /* The grey panels end 40px from the window edge: this keeps a 4px gap to their border. */
+    right: 44px;
+
+    /* On phones the main menu collapses into the hamburger, but the switcher stays in the bar,
+       just left of the menu button (54px wide, 30px from the edge). */
+    @media only screen and (max-width: 635px) {
+      top: 40px;
+      right: 96px;
+    }
+
+    /* Very narrow phones: tighter buttons so the switcher clears the logo. */
+    @media only screen and (max-width: 360px) {
+      button {
+        min-width: 32px;
+        padding: 6px 8px;
+      }
+    }
+  }
 `;
 
 export const Menu = styled.nav`

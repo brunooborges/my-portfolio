@@ -1,11 +1,11 @@
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   'data-isopen'?: boolean;
 }
 
 export const MenuMobile = styled.div`
-  button {
+  > button {
     display: none;
     width: 54px;
     height: 54px;
@@ -17,7 +17,8 @@ export const MenuMobile = styled.div`
     float: right;
     right: 30px;
     top: 30px;
-    z-index: 9999;
+    /* Above the open sidebar (9999), so the same button stays visible there as its close button. */
+    z-index: 10000;
     cursor: pointer;
 
     img {

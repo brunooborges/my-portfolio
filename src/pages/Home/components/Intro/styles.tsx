@@ -1,4 +1,4 @@
-import { css, keyframes, styled } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 interface ContainerProps {
   'data-isscrolled'?: boolean;
@@ -64,6 +64,7 @@ export const Container = styled.section<ContainerProps>`
   justify-content: flex-start;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary.light};
+  border-radius: 16px;
   margin: 24px;
   height: calc(100vh + 20px);
   padding-left: 100px;

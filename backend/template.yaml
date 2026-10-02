@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Unique-visitor counter for the portfolio (Lambda Function URL + DynamoDB).
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Default: https://brunoborges.netlify.app
+    Description: The only origin allowed to call the counter from a browser (CORS).
+  ExecutionRoleName:
+    Type: String
+    Default: portfolio-visitor-counter-lambda
+    Description: >-
+      Name of an EXISTING IAM role for the function (created once by an admin, see iam/README.md).
+      The stack never creates or changes IAM roles.
+  ReservedConcurrency:
+    Type: Number
+    Default: 0
+    MinValue: 0
+    Description: >-
+      Optional cap on simultaneous executions (cost/abuse guard). 0 = no reservation.
+      Accounts whose total Lambda concurrency quota is 10 cannot reserve any: leave it at 0.
+
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Architectures: [arm64]
+    MemorySize: 128
+    Timeout: 5
+
+Conditions:
+  HasReservedConcurrency: !Not [!Equals [!Ref ReservedConcurrency, 0]]
+
+Resources:
+  # Provisioned mode (1 RCU / 1 WCU) is covered by the DynamoDB Always Free
+  # allowance (25 RCU / 25 WCU, 25 GB). On-demand mode is NOT covered.
+  VisitorsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      # Fixed name so the pre-created execution role can be limited to this exact table.
+      TableName: portfolio-visitor-counter-visitors
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+      BillingMode: PROVISIONED
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  CounterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Fixed name so IAM policies and the log group can be scoped to exactly this function.
+      FunctionName: portfolio-visitor-counter
+      # Pre-bundled by `yarn bundle` (esbuild): index.mjs only. No `sam build` step needed.
+      CodeUri: dist/
+      Handler: index.handler
+      # Optional cost/abuse guard (see the ReservedConcurrency parameter); off by default.
+      ReservedConcurrentExecutions: !If [HasReservedConcurrency, !Ref ReservedConcurrency, !Ref 'AWS::NoValue']
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref VisitorsTable
+      # Existing role: with `Role` set, SAM does not create an IAM role.
+      Role: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${ExecutionRoleName}
+      # A Function URL is a free public HTTPS endpoint: no API Gateway needed.
+      FunctionUrlConfig:
+        AuthType: NONE
+        Cors:
+          AllowOrigins:
+            - !Ref AllowedOrigin
+          AllowMethods:
+            - GET
+            - POST
+          AllowHeaders:
+            - content-type
+          MaxAge: 86400
+
+  # No log group resource: Lambda creates /aws/lambda/<function> on its first invocation
+  # (the execution role's basic-execution policy allows it). Set retention by hand afterwards.
+
+Outputs:
+  CounterUrl:
+    Description: Base URL for the frontend (set as VITE_VISITOR_API_URL, without a trailing slash).
+    Value: !GetAtt CounterFunctionUrl.FunctionUrl
+  TableName:
+    Value: !Ref VisitorsTable

@@ -1,46 +1,26 @@
-import { keyframes, styled } from 'styled-components';
+import styled from 'styled-components';
 
-interface ProjectProps {
-  'data-isactive'?: boolean;
-}
-
-const scaleUp = keyframes`
-100% {
-  transform: scale(1);
-}
+export const Section = styled.section`
+  margin-bottom: 48px;
 `;
 
-const scaleRight = keyframes`
-100% {
-  transform: scaleX(1);
-}
-`;
-
-const fadeFromLeft = keyframes`
-100% {
-    left: 0;
-    opacity: 1;
-}
-`;
-
-export const Container = styled.section`
+export const Showcase = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
   background-color: ${({ theme }) => theme.colors.primary.light};
+  border-radius: 16px;
   margin: 64px 24px 0 24px;
-  max-height: 100vh;
-  height: 100%;
+  min-height: 70vh;
   padding: 20px;
 
   .slider {
     display: flex;
     flex-direction: column;
-    height: 100%;
     margin: 0 24px;
 
     .slider-carousel {
-      height: 75vh;
+      height: 60vh;
 
       .slider-counter {
         width: inherit;
@@ -62,8 +42,7 @@ export const Container = styled.section`
       display: flex;
       flex-direction: column;
       width: 100%;
-      max-height: 50vh;
-      height: 100%;
+      max-height: 40vh;
       justify-content: space-around;
 
       div {
@@ -96,20 +75,14 @@ export const Container = styled.section`
     background-color: ${({ theme }) => theme.colors.primary.lighter};
     border-radius: 23px;
 
-    div {
-      height: 32px;
-    }
-
     .slides-counter {
       font-weight: 400;
       font-style: normal;
       color: ${({ theme }) => theme.colors.slider};
       line-height: 32px;
 
-      span {
-        &:nth-child(1) {
-          color: ${({ theme }) => theme.colors.text.main};
-        }
+      span:nth-child(1) {
+        color: ${({ theme }) => theme.colors.text.main};
       }
     }
 
@@ -117,8 +90,19 @@ export const Container = styled.section`
     .next-slide {
       display: flex;
       align-items: center;
+      justify-content: center;
       width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
       cursor: pointer;
+
+      &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.highlight};
+        outline-offset: 2px;
+      }
 
       img {
         width: 32px;
@@ -126,18 +110,19 @@ export const Container = styled.section`
       }
     }
   }
+
   .projects {
     flex: 1;
     display: flex;
     align-items: center;
-    margin: 0 50px;
-    overflow: hidden;
+    justify-content: center;
+    margin: 0;
   }
 
   @media only screen and (max-width: 767px) {
     flex-direction: column-reverse;
-    margin: auto;
-    max-height: 100%;
+    margin: 24px auto 0;
+    min-height: 0;
     padding: 16px;
 
     .slider {
@@ -149,8 +134,10 @@ export const Container = styled.section`
         display: flex;
         align-items: center;
         height: 100%;
+
         .slider-counter {
           margin: 0;
+
           .slide-number {
             font-size: 40px;
           }
@@ -166,13 +153,10 @@ export const Container = styled.section`
           display: block;
           margin-bottom: 0px;
           margin-left: 15px;
-          background-color: ${({ theme }) => theme.colors.slider};
-          transition: all 0.2s ease;
 
           &.active-slide {
             height: 40px;
             width: 1px;
-            background-color: ${({ theme }) => theme.colors.highlight};
           }
 
           &:last-child {
@@ -184,18 +168,13 @@ export const Container = styled.section`
 
     .slider-next-prev {
       align-self: center;
-      margin: auto;
+      margin: 16px auto 0;
     }
-  }
-
-  .projects {
-    justify-content: center;
-    margin: 0;
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1366px) {
     margin: 24px;
-    max-height: 100%;
+    min-height: 0;
 
     .slider {
       .slider-navigator {
@@ -215,152 +194,63 @@ export const Container = styled.section`
   }
 `;
 
-export const Project = styled.div<ProjectProps>`
-  align-self: stretch;
-  flex: 1;
-  display: ${({ 'data-isactive': isActive }) => (isActive ? 'flex' : 'none')};
-  justify-content: space-around;
-  align-items: center;
-  max-height: 100vh;
-  height: 100%;
+export const Experiments = styled.section`
+  margin: 32px 24px 0;
+  padding: 0 24px;
 
-  .link-button {
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.main};
+    margin-bottom: 16px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    list-style: none;
+  }
+
+  li {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    border: none;
-    background-color: ${({ theme }) => theme.colors.highlight};
-    padding: 10px 30px;
-    border-radius: 23px;
-    margin-top: 30px;
-    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: ${({ theme }) => theme.colors.primary.light};
+    border-left: 3px solid ${({ theme }) => theme.colors.slider};
+    transition: border-color 0.2s ease;
+
+    &:hover,
+    &:focus-within {
+      border-left-color: ${({ theme }) => theme.colors.highlight};
+    }
+  }
+
+  .name {
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.light};
+  }
+
+  .links {
+    display: flex;
+    gap: 12px;
 
     a {
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 16px;
-      transition: all 0.2s ease-out;
-      color: ${({ theme }) => theme.colors.primary.main};
-    }
+      font-size: 13px;
+      font-weight: 700;
+      color: ${({ theme }) => theme.colors.text.main};
+      text-decoration: underline;
+      text-underline-offset: 3px;
 
-    &:hover {
-      a {
+      &:hover {
         color: ${({ theme }) => theme.colors.text.light};
       }
-    }
-  }
 
-  .left-section {
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    width: 33%;
-    left: -35px;
-    opacity: 0;
-    margin-left: 16px;
-    margin-right: 36px;
-    animation: ${fadeFromLeft} 2s 0.6s forwards cubic-bezier(0, 1.01, 0.32, 1);
-
-    h1 {
-      font-size: 48px;
-      line-height: 50px;
-      font-weight: 400;
-      text-align: left;
-      margin-bottom: 30px;
-      color: ${({ theme }) => theme.colors.text.main};
-    }
-
-    p {
-      text-align: justify;
-      color: ${({ theme }) => theme.colors.text.main};
-      white-space: break-spaces;
-    }
-  }
-
-  .right-section {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-
-    .bg-effect {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: auto;
-      background-color: ${({ theme }) => theme.colors.primary.lighter};
-      transform: scale(0);
-      animation: ${scaleRight} 0.7s 0.2s forwards cubic-bezier(0, 1.01, 0.32, 1);
-
-      img {
-        height: auto;
-        width: 100%;
-        padding: 8px;
-        transform: scale(0);
-        animation: ${scaleUp} 0.5s 0.3s forwards cubic-bezier(0, 1.01, 0.32, 1);
-        cursor: pointer;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 1260px) {
-    flex-direction: column;
-    justify-content: center;
-    max-height: 100%;
-    max-width: 100%;
-
-    .left-section {
-      margin: 0px auto;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-
-      h1 {
-        font-size: 36px;
-        text-align: center;
-      }
-
-      p {
-        font-size: 16px;
-      }
-    }
-    .right-section {
-      width: 100%;
-
-      .bg-effect {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        margin-top: 32px;
-
-        img {
-          height: auto;
-          width: 100%;
-          padding: 8px;
-        }
-        .link-button {
-          position: fixed;
-          top: unset;
-          left: unset;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .left-section {
-      h1 {
-        font-size: 32px;
-        text-align: center;
-      }
-
-      p {
-        font-size: 12px;
+      &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.highlight};
+        outline-offset: 2px;
       }
     }
   }

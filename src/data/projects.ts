@@ -1,135 +1,129 @@
-import project5 from '../assets/images/projects-images/fincheck.png';
-import project2 from '../assets/images/projects-images/github-search.png';
-import project6 from '../assets/images/projects-images/memory-game.png';
-import project4 from '../assets/images/projects-images/muilti-step-form.png';
-import project8 from '../assets/images/projects-images/my-portfolio.png';
-import project1 from '../assets/images/projects-images/mycontacts.png';
-import project3 from '../assets/images/projects-images/tic-tac-toe.png';
-import project7 from '../assets/images/projects-images/to-do-list.png';
-
+import brmoneyApiTransactions from '../assets/images/projects-images/brmoney/api-transactions.webp';
+import brmoneyDashboard from '../assets/images/projects-images/brmoney/dashboard.webp';
+import foodiaryActivity from '../assets/images/projects-images/foodiary/activity.webp';
+import foodiaryDashboard from '../assets/images/projects-images/foodiary/dashboard.webp';
+import foodiaryGoal from '../assets/images/projects-images/foodiary/goal.webp';
+import foodiaryMeal from '../assets/images/projects-images/foodiary/meal.webp';
+import foodiaryWelcome from '../assets/images/projects-images/foodiary/welcome.webp';
+import gazerDashboard from '../assets/images/projects-images/gazer/dashboard.webp';
+import gazerDirectives from '../assets/images/projects-images/gazer/directives.webp';
+import gazerFeed from '../assets/images/projects-images/gazer/feed.webp';
+import gazerPortfolio from '../assets/images/projects-images/gazer/portfolio.webp';
+import gazerSignin from '../assets/images/projects-images/gazer/signin.webp';
+import gazerStats from '../assets/images/projects-images/gazer/stats.webp';
+import fincheck from '../assets/images/projects-images/fincheck.png';
+import githubSearch from '../assets/images/projects-images/github-search.png';
+import mycontacts from '../assets/images/projects-images/mycontacts.png';
 import { type Project } from '../types/Project';
 
-export const projects: Project[] = [
+const GITHUB = 'https://github.com/brunooborges';
+const PAGES = 'https://brunooborges.github.io';
+
+/**
+ * Featured projects, shown in the slider. Company projects (Gazer, BR.Money)
+ * are private: no repository or live links, only cleared screenshots from
+ * `src/assets/images/projects-images/`.
+ */
+export const featuredProjects: readonly Project[] = [
   {
     id: 1,
-    name: 'Fincheck',
-    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with NestJS for the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage your personal finances in a simple way by creating accounts, transactions (income or expense), and categories of transactions, all of which are supported through the implemented REST API.
-
-At present, the back-end is hosted on Render, the database on ElephantSQL, and the front end on Github pages.
-
-The base project didn't have any means CRUD functionality for the categories and for the user there were only the create method, so I decided to add this functionalities as well as an option to create transactions with installments.
-
-I'll try to add more features whenever I can think of something new.
-
-Technologies:
-  - Node.js with NestJS
-  - PostgreSQL
-  - Prisma
-  - React.js
-  - TailwindCSS
-
-  Links for the Front and Back end:`,
-    github: 'https://github.com/brunooborges/my-fincheck-frontend',
-    github2: 'https://github.com/brunooborges/my-fincheck-api',
-    live: 'https://brunooborges.github.io/my-fincheck-frontend/',
-    screenshot: [project5],
+    slug: 'gazer',
+    name: 'Gazer',
+    visibility: 'private',
+    tech: ['Next.js', 'React', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL', 'WebSockets'],
+    screenshots: [gazerDashboard, gazerDirectives, gazerFeed, gazerPortfolio, gazerStats, gazerSignin],
   },
   {
     id: 2,
-    name: 'MyContacts',
-    description: `This project is a CRUD application created during the JStack course. It leverages Node.js with Express to build the back end, providing a REST API, and utilizes React.js for the front end. The main purpose of the application is to manage a contacts list with features like categorization, search, and sorting, all of which are supported through the implemented REST API.
-
-At present, the back-end is hosted on Render, the database on ElephantSQL, and the front end on Github pages.
-
-Technologies:
-  - Node.js with Express
-  - PostgreSQL
-  - REST API
-  - React.js
-  - Styled Components
-
-  Links for the Front and Back end:`,
-    github: 'https://github.com/brunooborges/mycontacts-front-end',
-    github2: 'https://github.com/brunooborges/mycontacts-api',
-    live: 'https://brunooborges.github.io/mycontacts-front-end/',
-    screenshot: [project1],
+    slug: 'brmoney',
+    name: 'BR.Money',
+    visibility: 'private',
+    tech: ['Next.js', 'React', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL', 'PIX'],
+    screenshots: [brmoneyDashboard, brmoneyApiTransactions],
   },
   {
     id: 3,
-    name: 'Github Search',
-    description: `This project is a React.js application developed as part of a mock interview test for a Junior React.js Developer position. It integrates the GitHub REST API to provide users with an efficient way to search for GitHub users.
-
-Technologies:
-  - React.js
-  - Styled Components
-  - Github REST API`,
-    github: 'https://github.com/brunooborges/github-search',
-    live: 'https://brunooborges.github.io/github-search/',
-    screenshot: [project2],
+    slug: 'foodiary',
+    name: 'Foodiary',
+    visibility: 'public',
+    tech: ['React Native', 'Expo', 'TypeScript', 'AWS Lambda', 'S3', 'SQS', 'PostgreSQL', 'OpenAI'],
+    screenshots: [foodiaryWelcome, foodiaryGoal, foodiaryActivity, foodiaryDashboard, foodiaryMeal],
+    screenshotOrientation: 'portrait',
+    github: `${GITHUB}/foodiary-frontend`,
+    github2: `${GITHUB}/foodiary-api`,
   },
   {
     id: 4,
-    name: 'Tic-tac-toe',
-    description: `This project is a web application created as part of a mock interview test for a Junior JavaScript Developer position. It features a straightforward Tic-tac-toe game with a resettable score functionality.
-
-Technologies:
-  - HTML
-  - CSS
-  - JavaScript`,
-    github: 'https://github.com/brunooborges/tic-tac-toe',
-    live: 'https://brunooborges.github.io/tic-tac-toe/',
-    screenshot: [project3],
+    slug: 'fincheck',
+    name: 'Fincheck',
+    visibility: 'public',
+    tech: ['React', 'TypeScript', 'Tailwind', 'NestJS', 'Prisma', 'PostgreSQL'],
+    screenshots: [fincheck],
+    github: `${GITHUB}/my-fincheck-frontend`,
+    github2: `${GITHUB}/my-fincheck-api`,
+    live: `${PAGES}/my-fincheck-frontend/`,
   },
   {
     id: 5,
-    name: 'Multi-step Form',
-    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. It focuses on creating a simple Multi-Step Form by leveraging the Context API for state management.
-
-Technologies:
-  - React.js
-  - TypeScript
-  - Styled Components`,
-    github: 'https://github.com/brunooborges/multi-step-form',
-    live: 'https://brunooborges.github.io/multi-step-form/',
-    screenshot: [project4],
+    slug: 'mycontacts',
+    name: 'MyContacts',
+    visibility: 'public',
+    tech: ['React', 'styled-components', 'Node.js', 'Express', 'PostgreSQL'],
+    screenshots: [mycontacts],
+    github: `${GITHUB}/mycontacts-front-end`,
+    github2: `${GITHUB}/mycontacts-api`,
+    live: `${PAGES}/mycontacts-front-end/`,
   },
   {
     id: 6,
-    name: 'Memory Game',
-    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. The main objective of the application is to create an engaging Memory Game, featuring a timer and a reset button for an enjoyable user experience.
-
-Technologies:
-  - React.js
-  - TypeScript
-  - Styled Components`,
-    github: 'https://github.com/brunooborges/React.js-memory-game',
-    live: 'https://brunooborges.github.io/React.js-memory-game/',
-    screenshot: [project6],
+    slug: 'github-search',
+    name: 'Github Search',
+    visibility: 'public',
+    tech: ['React', 'TypeScript', 'GitHub REST API'],
+    screenshots: [githubSearch],
+    github: `${GITHUB}/github-search`,
+    live: `${PAGES}/github-search/`,
   },
+];
+
+/** Small projects, shown as a compact "More experiments" list. */
+export const experimentProjects: readonly Project[] = [
   {
     id: 7,
-    name: 'To-do List',
-    description: `This project is a React.js application developed using TypeScript as part of the B7Web course. The main focus of the application is to create a straightforward To-do List, providing users with a practical tool for task management.
-
-Technologies:
-  - React.js
-  - TypeScript
-  - Styled Components`,
-    github: 'https://github.com/brunooborges/to-do-list',
-    live: 'https://brunooborges.github.io/to-do-list/',
-    screenshot: [project7],
+    slug: 'tic-tac-toe',
+    name: 'Tic-tac-toe',
+    visibility: 'public',
+    tech: ['React'],
+    github: `${GITHUB}/tic-tac-toe`,
+    live: `${PAGES}/tic-tac-toe/`,
   },
   {
     id: 8,
-    name: 'My Portfolio',
-    description: `This portfolio is built with React.js and TypeScript, showcasing my skills and knowledge acquired through dedicated studies and practical application. It serves as a platform to demonstrate my abilities and highlight the projects I've developed to present myself effectively.
-
-Technologies:
-  - React.js
-  - TypeScript
-  - Styled Components`,
-    github: 'https://github.com/brunooborges/my-portfolio',
-    live: 'https://brunoborges.netlify.app',
-    screenshot: [project8],
+    slug: 'memory-game',
+    name: 'Memory Game',
+    visibility: 'public',
+    tech: ['React'],
+    github: `${GITHUB}/react-memory-game`,
+    live: `${PAGES}/react-memory-game/`,
+  },
+  {
+    id: 9,
+    slug: 'multi-step-form',
+    name: 'Multi-step Form',
+    visibility: 'public',
+    tech: ['React'],
+    github: `${GITHUB}/multi-step-form`,
+    live: `${PAGES}/multi-step-form/`,
+  },
+  {
+    id: 10,
+    slug: 'to-do-list',
+    name: 'To-do List',
+    visibility: 'public',
+    tech: ['React'],
+    github: `${GITHUB}/to-do-list`,
+    live: `${PAGES}/to-do-list/`,
   },
 ];
+
+export const projects: readonly Project[] = [...featuredProjects, ...experimentProjects];

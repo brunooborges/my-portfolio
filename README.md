@@ -1,43 +1,54 @@
-![](./public//logo-b-front-end.png)
+# Bruno Borges - Portfolio
 
-# My Porftolio
-
-## Color Reference
-
-| Color           | Hex                                                              |
-| --------------- | ---------------------------------------------------------------- |
-| Background      | ![#121212](https://via.placeholder.com/10/121212?text=+) #121212 |
-| Primary Lighter | ![#333333](https://via.placeholder.com/10/333333?text=+) #333333 |
-| Primary Light   | ![#1F1F1F](https://via.placeholder.com/10/1F1F1F?text=+) #1F1F1F |
-| Primary Main    | ![#121212](https://via.placeholder.com/10/121212?text=+) #121212 |
-| Primary Dark    | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
-| Text Light      | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
-| Text Main       | ![#BEBEBE](https://via.placeholder.com/10/BEBEBE?text=+) #BEBEBE |
-| Highlight       | ![#3F51B5](https://via.placeholder.com/10/3F51B5?text=+) #3F51B5 |
-| Slider          | ![#4D4C4C](https://via.placeholder.com/10/4D4C4C?text=+) #4D4C4C |
-
-## Screenshot
+Bilingual (en-US / pt-BR) single-page portfolio built with React, TypeScript and Vite. Live at <https://brunoborges.netlify.app>.
 
 ![](./public/my-portfolio.png)
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- React 19, TypeScript, Vite
+- styled-components 6 (theme in `src/assets/styles/Themes/default.tsx`)
+- i18next + react-i18next + i18next-browser-languagedetector
+- react-scroll (section navigation), react-intersection-observer (About animation)
+- Vitest + Testing Library (happy-dom), ESLint, Prettier
+- Deployed on Netlify (`netlify.toml`)
 
-### `yarn start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Requires Node 20+ (`.nvmrc` pins 22) and yarn.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Command              | What it does                          |
+| -------------------- | ------------------------------------- |
+| `yarn dev`           | Dev server at <http://localhost:5173> |
+| `yarn build`         | Type-check and build to `dist/`       |
+| `yarn preview`       | Serve the production build            |
+| `yarn test`          | Run the unit/component tests          |
+| `yarn test:coverage` | Tests with the 80% coverage gate      |
+| `yarn lint`          | ESLint                                |
+| `yarn typecheck`     | `tsc -b --noEmit`                     |
 
-### `yarn build`
+## Visitor counter
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The footer shows a unique-visitor count served by a small AWS backend in [`backend/`](./backend) (Lambda Function URL + DynamoDB, see its README). Each browser gets a random anonymous id in `localStorage` and is counted once. The frontend reads its URL from `VITE_VISITOR_API_URL` (see `.env.example`); when unset, the counter is hidden.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Languages
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Copy lives in `src/i18n/locales/en-US.json` and `pt-BR.json`. The language is picked from `localStorage` (`lang`), then the browser language (any `pt-*` maps to pt-BR), then falls back to en-US. `useDocumentMeta` keeps `<html lang>`, the title and the meta description in sync.
+
+To add a language:
+
+1. Add the code to `SUPPORTED_LANGUAGES` and a prefix mapping in `src/i18n/languages.ts`.
+2. Create `src/i18n/locales/<code>.json` with exactly the same keys (a test fails if the keys, or the interpolation placeholders, differ).
+3. Register it in `src/i18n/index.ts` and add a button in `LanguageSwitcher`.
+
+## Projects
+
+Projects are declared in `src/data/projects.ts` (links, stack, media) and described in the locale files under `projects.<slug>`.
+
+- **Featured** projects appear in the slider and need `summary` and `highlights` in every language.
+- **Experiments** appear in the compact "More experiments" list and only need `summary`.
+- **Private (company) projects** must not have `github`, `github2` or `live` (a test enforces it). Without a `screenshot` they render a designed placeholder. Only add screenshots or video you have permission to publish.
+
+## Testing
+
+Tests sit next to the code (`*.test.ts(x)`). Locale parity, project data rules, the slider, the About section, the footer and the language switcher are covered. Coverage excludes styles, assets and the entry file.

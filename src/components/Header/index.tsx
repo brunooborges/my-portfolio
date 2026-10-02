@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 
+import LanguageSwitcher from '../LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
 
 import logo from '../../assets/images/logos/logo-b-front-end.svg';
@@ -9,7 +9,8 @@ import useScrollHook from '../../hooks/useScrollHook';
 
 import { Container, Menu } from './styles';
 
-export default function Header(): JSX.Element {
+export default function Header(): React.JSX.Element {
+  const { t } = useTranslation();
   const isScrolled = useScrollHook({ heightScrolled: 250 });
 
   return (
@@ -18,41 +19,31 @@ export default function Header(): JSX.Element {
         <a
           href='/'
           className='logo-link'
+          aria-label={t('nav.home')}
         >
           <img
             src={logo}
             alt=''
-            srcSet=''
           />
         </a>
       </div>
 
-      <Menu>
-        <Link
-          to='intro'
-          smooth={true}
-          duration={500}
-          offset={-50}
-        >
-          <span>home</span>
-        </Link>
-        <Link
-          to='about'
-          smooth={true}
-          duration={500}
-          offset={-90}
-        >
-          <span>about</span>
-        </Link>
-        <Link
-          to='portfolio'
-          smooth={true}
-          duration={500}
-          offset={-100}
-        >
-          <span>portfolio</span>
-        </Link>
+      <Menu aria-label={t('nav.main')}>
+        <a href='#intro'>
+          <span>{t('nav.home')}</span>
+        </a>
+        <a href='#about'>
+          <span>{t('nav.about')}</span>
+        </a>
+        <a href='#portfolio'>
+          <span>{t('nav.portfolio')}</span>
+        </a>
       </Menu>
+
+      <div className='header-language'>
+        <LanguageSwitcher />
+      </div>
+
       <MobileMenu />
     </Container>
   );
