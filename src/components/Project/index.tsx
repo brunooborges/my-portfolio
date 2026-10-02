@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useCallback, useState, type KeyboardEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import useTranslatedList from '../../hooks/useTranslatedList';
+import wrapIndex from '../../lib/wrapIndex';
 import { type Project } from '../../types/Project';
+import ChevronIcon from '../ChevronIcon';
+import Modal from '../Modal';
 import { Container } from './styles';
 
 interface ProjectCardProps {
   project: Project;
-  onOpenImage: (image: string, alt: string) => void;
 }
 
 const EXTERNAL_REL = 'noopener noreferrer';
 
-export default function ProjectCard({ project, onOpenImage }: ProjectCardProps): React.JSX.Element {
+export default function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
   const { t } = useTranslation();
   const { slug, name, visibility, tech, screenshots = [], screenshotOrientation = 'landscape', github, github2, live } =
     project;
@@ -21,11 +24,33 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
   const highlightList = useTranslatedList(`projects.${slug}.highlights`);
   const captions = useTranslatedList(`projects.${slug}.screenshots`);
   const [activeImage, setActiveImage] = useState(0);
+  const [isEnlarged, setIsEnlarged] = useState(false);
   const enlargeLabel = t('portfolio.openImage', { name });
   const captionOf = (index: number): string => captions[index] ?? t('portfolio.screenshotAlt', { name });
   const hasGallery = screenshots.length > 1;
   const currentImage = screenshots[activeImage];
   const hasTwoRepos = github2 !== undefined;
+
+  const closeEnlarged = useCallback((): void => {
+    setIsEnlarged(false);
+  }, []);
+
+  function showImage(step: number): void {
+    setActiveImage((index) => wrapIndex(index, step, screenshots.length));
+  }
+
+  // Left and right browse the screenshots from anywhere in the gallery. The project slider has its
+  // own arrow keys, but they live on the slider, not on the card, so the two never overlap.
+  function handleGalleryKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
+    if (!hasGallery || event.target instanceof HTMLAnchorElement) {
+      return;
+    }
+
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      showImage(event.key === 'ArrowLeft' ? -1 : 1);
+    }
+  }
 
   return (
     <Container data-orientation={screenshotOrientation}>
@@ -86,7 +111,10 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
         )}
       </div>
 
-      <div className='right-section'>
+      <div
+        className='right-section'
+        onKeyDown={handleGalleryKeyDown}
+      >
         {currentImage !== undefined ? (
           <>
             <div className='bg-effect'>
@@ -95,19 +123,50 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
                 className='screenshot-button'
                 aria-label={enlargeLabel}
                 onClick={() => {
-                  onOpenImage(currentImage, captionOf(activeImage));
+                  setIsEnlarged(true);
                 }}
               >
                 <img
                   src={currentImage}
                   alt=''
+                  loading='lazy'
+                  decoding='async'
                 />
               </button>
+              {hasGallery && (
+                <>
+                  <button
+                    type='button'
+                    className='nav-button previous'
+                    aria-label={t('portfolio.previousScreenshot')}
+                    onClick={() => {
+                      showImage(-1);
+                    }}
+                  >
+                    <ChevronIcon direction='left' />
+                  </button>
+                  <button
+                    type='button'
+                    className='nav-button next'
+                    aria-label={t('portfolio.nextScreenshot')}
+                    onClick={() => {
+                      showImage(1);
+                    }}
+                  >
+                    <ChevronIcon direction='right' />
+                  </button>
+                </>
+              )}
             </div>
 
             {hasGallery && (
               <>
-                <p className='caption'>{captionOf(activeImage)}</p>
+                <p
+                  className='caption'
+                  aria-live='polite'
+                >
+                  {captionOf(activeImage)}
+                </p>
                 <ul
                   className='thumbs'
                   aria-label={t('portfolio.screenshotsLabel')}
@@ -125,6 +184,8 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
                         <img
                           src={image}
                           alt=''
+                          loading='lazy'
+                          decoding='async'
                         />
                       </button>
                     </li>
@@ -166,6 +227,19 @@ export default function ProjectCard({ project, onOpenImage }: ProjectCardProps):
           </a>
         )}
       </div>
+
+      {isEnlarged &&
+        currentImage !== undefined &&
+        createPortal(
+          <Modal
+            images={screenshots.map((src, index) => ({ src, alt: captionOf(index) }))}
+            index={activeImage}
+            onIndexChange={setActiveImage}
+            orientation={screenshotOrientation}
+            closeModal={closeEnlarged}
+          />,
+          document.body,
+        )}
     </Container>
   );
 }

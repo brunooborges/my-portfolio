@@ -30,6 +30,10 @@
       "Minha stack principal é TypeScript, React, Next.js, Node.js com NestJS e PostgreSQL. Estou buscando minha próxima oportunidade em um time que construa produtos que as pessoas realmente gostem de usar, onde eu possa continuar crescendo ao lado de ótimos engenheiros e assumir a responsabilidade real pelo que entrego."
     ]
   },
+  "theme": {
+    "toLight": "Mudar para o tema claro",
+    "toDark": "Mudar para o tema escuro"
+  },
   "contact": {
     "title": "Contato",
     "intro": "Estou disponível para novas oportunidades. O jeito mais rápido de falar comigo é por e-mail, ou você pode me encontrar no LinkedIn e no GitHub.",
@@ -42,6 +46,8 @@
     "counter": "Projeto {{current}} de {{total}}",
     "openImage": "Ampliar captura de tela de {{name}}",
     "screenshotsLabel": "Capturas de tela",
+    "previousScreenshot": "Captura anterior",
+    "nextScreenshot": "Próxima captura",
     "screenshotAlt": "Captura de tela de {{name}}",
     "companyProject": "Projeto de empresa",
     "companyProjectNote": "Código privado, portanto sem links para o código-fonte ou para o site.",
@@ -59,7 +65,8 @@
   "modal": {
     "close": "Fechar imagem",
     "title": "Visualização da imagem",
-    "imageArea": "Captura de tela, role para ver por inteiro"
+    "imageArea": "Captura de tela, role para ver por inteiro",
+    "counter": "Imagem {{current}} de {{total}}"
   },
   "footer": {
     "credit": "Projetado e desenvolvido por Bruno Borges",

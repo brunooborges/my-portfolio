@@ -77,7 +77,7 @@ export const Container = styled.section<ContainerProps>`
     align-items: flex-start;
 
     p {
-      color: ${({ theme }) => theme.colors.highlight};
+      color: ${({ theme }) => theme.colors.accent};
       font-weight: 800;
       font-size: 24px;
     }

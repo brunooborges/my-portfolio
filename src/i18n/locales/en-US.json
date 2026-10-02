@@ -30,6 +30,10 @@
       "My core stack is TypeScript, React, Next.js, Node.js with NestJS, and PostgreSQL. I'm looking for my next opportunity on a team building products people actually enjoy using, where I can keep growing alongside great engineers and take real ownership of what I ship."
     ]
   },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
   "contact": {
     "title": "Contact",
     "intro": "I'm open to new opportunities. The quickest way to reach me is by email, or you can find me on LinkedIn and GitHub.",
@@ -42,6 +46,8 @@
     "counter": "Project {{current}} of {{total}}",
     "openImage": "Enlarge screenshot of {{name}}",
     "screenshotsLabel": "Screenshots",
+    "previousScreenshot": "Previous screenshot",
+    "nextScreenshot": "Next screenshot",
     "screenshotAlt": "Screenshot of {{name}}",
     "companyProject": "Company project",
     "companyProjectNote": "Private code, so no source or live links.",
@@ -59,7 +65,8 @@
   "modal": {
     "close": "Close image",
     "title": "Image preview",
-    "imageArea": "Screenshot, scroll to see all of it"
+    "imageArea": "Screenshot, scroll to see all of it",
+    "counter": "Image {{current}} of {{total}}"
   },
   "footer": {
     "credit": "Designed & Built by Bruno Borges",

@@ -74,8 +74,12 @@ export const SideBar = styled.div<ContainerProps>`
     }
 
     &:hover {
-      color: ${({ theme }) => theme.colors.highlight};
+      color: ${({ theme }) => theme.colors.accent};
     }
+  }
+
+  .menu-theme {
+    margin-top: 12px;
   }
 `;
 

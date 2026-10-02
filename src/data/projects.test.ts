@@ -107,6 +107,14 @@ describe('projects data', () => {
     }
   });
 
+  it('ships every screenshot as WebP, not PNG', () => {
+    for (const project of projects) {
+      for (const image of project.screenshots ?? []) {
+        expect(image, project.slug).toMatch(/.webp$/);
+      }
+    }
+  });
+
   it('never reuses the same image twice within a project', () => {
     for (const project of projects) {
       const images = project.screenshots ?? [];

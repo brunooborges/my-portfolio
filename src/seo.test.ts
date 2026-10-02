@@ -61,6 +61,15 @@ describe('share preview and SEO tags in index.html', () => {
   });
 });
 
+describe('first paint', () => {
+  it('paints the dark page color (light for a light system) before any JavaScript runs, so there is no white flash', () => {
+    const style = page.querySelector('style')?.textContent ?? '';
+
+    expect(style).toContain('background: #121212');
+    expect(style).toMatch(/prefers-color-scheme:\s*light[\s\S]*background:\s*#F4F4F8/i);
+  });
+});
+
 describe('sitemap and robots', () => {
   it('lists the home page in the sitemap', () => {
     expect(sitemap).toContain(`<loc>${SITE}/</loc>`);

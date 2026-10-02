@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import LanguageSwitcher from '../LanguageSwitcher';
+import ThemeToggle from '../ThemeToggle';
 import MobileMenu from './components/MobileMenu';
 
 import logo from '../../assets/images/logos/logo-b-front-end.svg';
@@ -43,7 +44,10 @@ export default function Header(): React.JSX.Element {
         </a>
       </Menu>
 
-      <div className='header-language'>
+      <div className='header-controls'>
+        <div className='header-theme'>
+          <ThemeToggle />
+        </div>
         <LanguageSwitcher />
       </div>
 

@@ -13,7 +13,7 @@ export interface TechTile {
   label: string;
   /** SVG path data on a 24x24 viewBox. */
   path: string;
-  /** Brand color, `#RRGGBB`. */
+  /** Brand color, `#RRGGBB`, or `currentColor` for a mark that follows the text color. */
   color: string;
 }
 
@@ -24,8 +24,8 @@ export interface TechTile {
 const CLOUD_PATH =
   'M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z';
 
-// Next.js is black in simple-icons, which disappears on the dark background.
-const NEXTJS_COLOR = '#FFFFFF';
+// Next.js is black in simple-icons: follow the text color so it shows on dark and light pages.
+const NEXTJS_COLOR = 'currentColor';
 
 export const techStack: readonly TechTile[] = [
   { id: 'typescript', label: 'TypeScript', path: siTypescript.path, color: `#${siTypescript.hex}` },

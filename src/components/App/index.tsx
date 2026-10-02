@@ -1,13 +1,11 @@
-import { ThemeProvider } from 'styled-components';
-
 import Home from '../../pages/Home';
 import Footer from '../Footer';
 import Header from '../Header';
 
-import defaultTheme from '../../assets/styles/Themes/default';
 import GlobalStyles from '../../assets/styles/global';
 import useDocumentMeta from '../../hooks/useDocumentMeta';
 import useScrollToHash from '../../hooks/useScrollToHash';
+import ThemeModeProvider from '../../theme/ThemeModeProvider';
 import { Container } from './styles';
 
 export default function App(): React.JSX.Element {
@@ -15,7 +13,7 @@ export default function App(): React.JSX.Element {
   useScrollToHash();
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeModeProvider>
       <GlobalStyles />
 
       <Container>
@@ -23,6 +21,6 @@ export default function App(): React.JSX.Element {
         <Home />
         <Footer />
       </Container>
-    </ThemeProvider>
+    </ThemeModeProvider>
   );
 }

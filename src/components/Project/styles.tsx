@@ -35,15 +35,15 @@ export const Container = styled.article`
     font-size: 16px;
     border: none;
     background-color: ${({ theme }) => theme.colors.highlight};
-    color: ${({ theme }) => theme.colors.primary.main};
+    color: ${({ theme }) => theme.colors.onHighlight};
     padding: 10px 30px;
     border-radius: 23px;
     margin-top: 24px;
     cursor: pointer;
-    transition: color 0.2s ease-out;
+    transition: filter 0.2s ease-out;
 
     &:hover {
-      color: ${({ theme }) => theme.colors.text.light};
+      filter: brightness(1.15);
     }
 
     &:focus-visible {
@@ -80,7 +80,7 @@ export const Container = styled.article`
       gap: 2px;
       margin-bottom: 16px;
       padding: 6px 12px;
-      border-left: 3px solid ${({ theme }) => theme.colors.highlight};
+      border-left: 3px solid ${({ theme }) => theme.colors.accent};
       background: ${({ theme }) => theme.colors.primary.lighter};
 
       span {
@@ -114,7 +114,7 @@ export const Container = styled.article`
       }
 
       li::marker {
-        color: ${({ theme }) => theme.colors.highlight};
+        color: ${({ theme }) => theme.colors.accent};
       }
     }
 
@@ -150,6 +150,7 @@ export const Container = styled.article`
     width: 50%;
 
     .bg-effect {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -160,9 +161,46 @@ export const Container = styled.article`
       background-color: transparent;
       border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.hairline};
       transform: scale(0);
       animation: ${scaleRight} 0.7s 0.2s forwards cubic-bezier(0, 1.01, 0.32, 1);
+
+      /* Previous / next over the image. Dark chips with a white arrow read on any screenshot, and
+         the focus ring has a dark halo so it shows on white screenshots as well. */
+      .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.55);
+        color: #fff;
+        cursor: pointer;
+        z-index: 1;
+        transition: background-color 0.2s ease;
+
+        &.previous {
+          left: 8px;
+        }
+
+        &.next {
+          right: 8px;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.8);
+        }
+
+        &:focus-visible {
+          outline: 2px solid #fff;
+          box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.65);
+        }
+      }
 
       .screenshot-button {
         display: block;
@@ -175,7 +213,7 @@ export const Container = styled.article`
         animation: ${scaleUp} 0.5s 0.3s forwards cubic-bezier(0, 1.01, 0.32, 1);
 
         &:focus-visible {
-          outline: 2px solid ${({ theme }) => theme.colors.highlight};
+          outline: 2px solid ${({ theme }) => theme.colors.accent};
           outline-offset: -2px;
         }
 
@@ -227,7 +265,7 @@ export const Container = styled.article`
 
         &[aria-pressed='true'] {
           opacity: 1;
-          border-color: ${({ theme }) => theme.colors.highlight};
+          border-color: ${({ theme }) => theme.colors.accent};
         }
 
         &:focus-visible {
@@ -260,7 +298,7 @@ export const Container = styled.article`
         font-size: 96px;
         line-height: 1;
         font-weight: 800;
-        color: ${({ theme }) => theme.colors.highlight};
+        color: ${({ theme }) => theme.colors.accent};
       }
 
       .placeholder-text {

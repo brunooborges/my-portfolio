@@ -11,9 +11,9 @@ import gazerFeed from '../assets/images/projects-images/gazer/feed.webp';
 import gazerPortfolio from '../assets/images/projects-images/gazer/portfolio.webp';
 import gazerSignin from '../assets/images/projects-images/gazer/signin.webp';
 import gazerStats from '../assets/images/projects-images/gazer/stats.webp';
-import fincheck from '../assets/images/projects-images/fincheck.png';
-import githubSearch from '../assets/images/projects-images/github-search.png';
-import mycontacts from '../assets/images/projects-images/mycontacts.png';
+import fincheck from '../assets/images/projects-images/fincheck.webp';
+import githubSearch from '../assets/images/projects-images/github-search.webp';
+import mycontacts from '../assets/images/projects-images/mycontacts.webp';
 import { type Project } from '../types/Project';
 
 const GITHUB = 'https://github.com/brunooborges';

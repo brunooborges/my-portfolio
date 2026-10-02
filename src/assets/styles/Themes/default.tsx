@@ -1,4 +1,8 @@
-export default {
+import type { AppTheme } from './types';
+
+/** The dark theme, and the default one. */
+const darkTheme: AppTheme = {
+  mode: 'dark',
   colors: {
     background: '#121212',
     primary: {
@@ -12,6 +16,11 @@ export default {
       main: '#BEBEBE',
     },
     highlight: '#3F51B5',
+    accent: '#8C9EFF',
+    onHighlight: '#FFFFFF',
     slider: '#4D4C4C',
+    hairline: 'rgba(255, 255, 255, 0.1)',
   },
 };
+
+export default darkTheme;

@@ -11,7 +11,7 @@ export const Container = styled.section`
   h2 {
     font-size: 64px;
     font-weight: 800;
-    color: ${({ theme }) => theme.colors.highlight};
+    color: ${({ theme }) => theme.colors.accent};
   }
 
   .intro {
@@ -40,13 +40,19 @@ export const Container = styled.section`
     overflow-wrap: anywhere;
     transition:
       background-color 0.2s ease,
-      border-color 0.2s ease;
+      border-color 0.2s ease,
+      filter 0.2s ease;
 
     &.primary {
       background-color: ${({ theme }) => theme.colors.highlight};
+      color: ${({ theme }) => theme.colors.onHighlight};
+
+      &:hover {
+        filter: brightness(1.15);
+      }
     }
 
-    &:hover {
+    &.secondary:hover {
       background-color: ${({ theme }) => theme.colors.primary.lighter};
       border-color: ${({ theme }) => theme.colors.text.light};
     }
@@ -72,7 +78,7 @@ export const Container = styled.section`
       }
 
       &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.colors.highlight};
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
         outline-offset: 3px;
       }
     }
