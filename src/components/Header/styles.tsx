@@ -85,7 +85,8 @@ export const Container = styled.header<ContainerProps>`
   .header-language {
     position: absolute;
     top: 36px;
-    right: 40px;
+    /* The grey panels end 40px from the window edge: this keeps a 4px gap to their border. */
+    right: 44px;
 
     /* On phones the main menu collapses into the hamburger, but the switcher stays in the bar,
        just left of the menu button (54px wide, 30px from the edge). */

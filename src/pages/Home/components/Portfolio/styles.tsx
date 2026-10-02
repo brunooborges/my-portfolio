@@ -9,6 +9,7 @@ export const Showcase = styled.div`
   justify-content: space-evenly;
   align-items: stretch;
   background-color: ${({ theme }) => theme.colors.primary.light};
+  border-radius: 16px;
   margin: 64px 24px 0 24px;
   min-height: 70vh;
   padding: 20px;
