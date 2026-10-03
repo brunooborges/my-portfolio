@@ -4,6 +4,7 @@ import arrow from '../../../../assets/images/icons/arrow-down.svg';
 import github from '../../../../assets/images/icons/github.svg';
 import linkedin from '../../../../assets/images/icons/linkedin.svg';
 
+import { GITHUB_URL, LINKEDIN_URL } from '../../../../data/contact';
 import useScrollHook from '../../../../hooks/useScrollHook';
 
 import { Container } from './styles';
@@ -28,7 +29,7 @@ export default function Intro({ id }: IntroProps): React.JSX.Element {
         <h2>{t('intro.role')}</h2>
         <div>
           <a
-            href='https://www.linkedin.com/in/brunooborges/'
+            href={LINKEDIN_URL}
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -38,7 +39,7 @@ export default function Intro({ id }: IntroProps): React.JSX.Element {
             />
           </a>
           <a
-            href='https://github.com/brunooborges/'
+            href={GITHUB_URL}
             target='_blank'
             rel='noopener noreferrer'
           >

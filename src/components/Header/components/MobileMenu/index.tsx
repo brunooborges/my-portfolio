@@ -55,6 +55,12 @@ export default function MobileMenu(): React.JSX.Element {
             >
               <span>{t('nav.portfolio')}</span>
             </a>
+            <a
+              href='#contact'
+              onClick={toggleMenu}
+            >
+              <span>{t('nav.contact')}</span>
+            </a>
           </SideBar>
         </nav>
       </MenuMobile>

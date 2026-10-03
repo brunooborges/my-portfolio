@@ -38,6 +38,9 @@ export default function Header(): React.JSX.Element {
         <a href='#portfolio'>
           <span>{t('nav.portfolio')}</span>
         </a>
+        <a href='#contact'>
+          <span>{t('nav.contact')}</span>
+        </a>
       </Menu>
 
       <div className='header-language'>

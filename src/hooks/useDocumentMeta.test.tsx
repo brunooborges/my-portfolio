@@ -10,9 +10,20 @@ function wrapper({ children }: { children: ReactNode }): React.JSX.Element {
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
 
+function metaContent(selector: string): string | null {
+  return document.querySelector(selector)?.getAttribute('content') ?? null;
+}
+
 describe('useDocumentMeta', () => {
   beforeEach(async () => {
-    document.head.innerHTML = '<meta name="description" content="" />';
+    document.head.innerHTML = [
+      '<meta name="description" content="" />',
+      '<meta property="og:title" content="" />',
+      '<meta property="og:description" content="" />',
+      '<meta property="og:locale" content="" />',
+      '<meta name="twitter:title" content="" />',
+      '<meta name="twitter:description" content="" />',
+    ].join('');
     await i18n.changeLanguage('en-US');
   });
 
@@ -40,5 +51,31 @@ describe('useDocumentMeta', () => {
       'content',
       'Bruno Borges, Desenvolvedor Full-Stack que adora construir ótimas experiências de usuário.',
     );
+  });
+  it('keeps the share-preview tags (Open Graph and Twitter) in the active language', async () => {
+    renderHook(() => useDocumentMeta(), { wrapper });
+
+    expect(metaContent('meta[property="og:title"]')).toBe('Bruno Borges - Full-Stack Developer');
+    expect(metaContent('meta[property="og:description"]')).toBe(
+      'Bruno Borges, a Full-Stack Developer who loves building great user experiences.',
+    );
+    expect(metaContent('meta[property="og:locale"]')).toBe('en_US');
+    expect(metaContent('meta[name="twitter:title"]')).toBe('Bruno Borges - Full-Stack Developer');
+
+    await act(async () => {
+      await i18n.changeLanguage('pt-BR');
+    });
+
+    expect(metaContent('meta[property="og:title"]')).toBe('Bruno Borges - Desenvolvedor Full-Stack');
+    expect(metaContent('meta[property="og:locale"]')).toBe('pt_BR');
+    expect(metaContent('meta[name="twitter:description"]')).toBe(
+      'Bruno Borges, Desenvolvedor Full-Stack que adora construir ótimas experiências de usuário.',
+    );
+  });
+
+  it('does not fail when the page has no share-preview tags', () => {
+    document.head.innerHTML = '';
+
+    expect(() => renderHook(() => useDocumentMeta(), { wrapper })).not.toThrow();
   });
 });

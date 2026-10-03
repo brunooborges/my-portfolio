@@ -7,6 +7,7 @@
     "home": "Home",
     "about": "About",
     "portfolio": "Portfolio",
+    "contact": "Contact",
     "menu": "Menu",
     "main": "Main",
     "mobile": "Mobile menu",
@@ -28,6 +29,11 @@
       "Along the way, I learned to care about what makes software feel reliable: clean, well-tested code (90%+ coverage), clear loading, error and retry states, and interfaces that stay usable when the network or an API doesn't cooperate. I'm also pursuing an associate degree in Systems Analysis and Development, and I keep building on the side, like Foodiary, a serverless AI diet analyst on AWS that I built while following the JStack Lab course. My English, which I started learning at 15 and have sharpened ever since, is fluent.",
       "My core stack is TypeScript, React, Next.js, Node.js with NestJS, and PostgreSQL. I'm looking for my next opportunity on a team building products people actually enjoy using, where I can keep growing alongside great engineers and take real ownership of what I ship."
     ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "I'm open to new opportunities. The quickest way to reach me is by email, or you can find me on LinkedIn and GitHub.",
+    "resume": "Download resume (PDF)"
   },
   "portfolio": {
     "title": "Portfolio",
