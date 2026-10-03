@@ -47,6 +47,26 @@ describe('About', () => {
     expect(screen.getByText(/while following the JStack Lab course/)).toBeInTheDocument();
   });
 
+  it('loads the portrait lazily, with its size declared so the page does not jump', () => {
+    renderWithProviders(<About id='about' />);
+
+    const photo = screen.getByRole('img', { name: 'Portrait of Bruno Borges' });
+
+    expect(photo).toHaveAttribute('loading', 'lazy');
+    expect(photo).toHaveAttribute('decoding', 'async');
+    expect(photo).toHaveAttribute('width', '600');
+    expect(photo).toHaveAttribute('height', '600');
+    expect(photo.getAttribute('src')).toMatch(/.webp$/);
+  });
+
+  it('keeps the portrait square: the width attribute must not stretch it against the CSS height', () => {
+    renderWithProviders(<About id='about' />);
+
+    const photo = screen.getByRole('img', { name: 'Portrait of Bruno Borges' });
+
+    expect(window.getComputedStyle(photo).width).toBe('auto');
+  });
+
   it('shows the core stack tiles', () => {
     renderWithProviders(<About id='about' />);
 

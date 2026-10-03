@@ -41,6 +41,23 @@ Object.defineProperty(globalThis, 'localStorage', {
   configurable: true,
 });
 
+/**
+ * happy-dom reports `prefers-color-scheme: light` as matching, which would start every test in the
+ * light theme. Tests get a system that asks for nothing (so the site's dark design applies);
+ * a test that needs another preference mocks `window.matchMedia` itself.
+ */
+window.matchMedia = ((query: string): MediaQueryList =>
+  ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: () => undefined,
+    removeEventListener: () => undefined,
+    addListener: () => undefined,
+    removeListener: () => undefined,
+    dispatchEvent: () => false,
+  }) as MediaQueryList) as typeof window.matchMedia;
+
 if (typeof globalThis.IntersectionObserver === 'undefined') {
   class NoopIntersectionObserver implements IntersectionObserver {
     readonly root = null;

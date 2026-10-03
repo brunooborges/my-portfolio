@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import close from '../../../../assets/images/icons/close-menu.svg';
 import menu from '../../../../assets/images/icons/menu-icon.svg';
 
+import ThemeToggle from '../../../ThemeToggle';
 import useMobileMenu from './useMobileMenu';
 
 import { MenuMobile, Overlay, SideBar } from './styles';
@@ -61,6 +62,9 @@ export default function MobileMenu(): React.JSX.Element {
             >
               <span>{t('nav.contact')}</span>
             </a>
+            <div className='menu-theme'>
+              <ThemeToggle withLabel />
+            </div>
           </SideBar>
         </nav>
       </MenuMobile>

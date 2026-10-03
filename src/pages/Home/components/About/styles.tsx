@@ -36,7 +36,7 @@ export const Container = styled.section<ContainerProps>`
     h2 {
       font-size: 64px;
       font-weight: 800;
-      color: ${({ theme }) => theme.colors.highlight};
+      color: ${({ theme }) => theme.colors.accent};
     }
 
     .infos {
@@ -67,6 +67,9 @@ export const Container = styled.section<ContainerProps>`
 
       .slide-from-right {
         img {
+          /* The width/height attributes only reserve space; CSS sets the height and the width
+             follows the image ratio (an attribute width would otherwise stretch it). */
+          width: auto;
           height: 300px;
           margin-right: 240px;
         }
@@ -113,12 +116,12 @@ export const Container = styled.section<ContainerProps>`
 
     .tech.top {
       border: 1px solid;
-      border-image: linear-gradient(to bottom, #3f51b5, #000);
+      border-image: linear-gradient(to bottom, ${({ theme }) => theme.colors.highlight}, ${({ theme }) => theme.colors.primary.dark});
       border-image-slice: 1;
     }
     .tech.bot {
       border: 1px solid;
-      border-image: linear-gradient(to top, #3f51b5, #000);
+      border-image: linear-gradient(to top, ${({ theme }) => theme.colors.highlight}, ${({ theme }) => theme.colors.primary.dark});
       border-image-slice: 1;
     }
   }

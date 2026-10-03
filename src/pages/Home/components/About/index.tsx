@@ -1,7 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 
-import photo from '../../../../assets/images/bruno-photo.png';
+import photo from '../../../../assets/images/bruno-photo.webp';
 
 import useTranslatedList from '../../../../hooks/useTranslatedList';
 import { techStack } from './techStack';
@@ -36,6 +36,10 @@ export default function About({ id }: AboutProps): React.JSX.Element {
             <img
               src={photo}
               alt={t('about.photoAlt')}
+              width={600}
+              height={600}
+              loading='lazy'
+              decoding='async'
             />
           </div>
         </div>

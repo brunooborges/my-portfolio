@@ -78,11 +78,11 @@ export const Showcase = styled.div`
     .slides-counter {
       font-weight: 400;
       font-style: normal;
-      color: ${({ theme }) => theme.colors.slider};
+      color: ${({ theme }) => theme.colors.text.main};
       line-height: 32px;
 
       span:nth-child(1) {
-        color: ${({ theme }) => theme.colors.text.main};
+        color: ${({ theme }) => theme.colors.text.light};
       }
     }
 
@@ -100,7 +100,7 @@ export const Showcase = styled.div`
       cursor: pointer;
 
       &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.colors.highlight};
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
         outline-offset: 2px;
       }
 
@@ -214,9 +214,10 @@ export const Experiments = styled.section`
 
   li {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 6px 12px;
     padding: 12px 16px;
     background: ${({ theme }) => theme.colors.primary.light};
     border-left: 3px solid ${({ theme }) => theme.colors.slider};
@@ -224,7 +225,7 @@ export const Experiments = styled.section`
 
     &:hover,
     &:focus-within {
-      border-left-color: ${({ theme }) => theme.colors.highlight};
+      border-left-color: ${({ theme }) => theme.colors.accent};
     }
   }
 
@@ -235,9 +236,11 @@ export const Experiments = styled.section`
 
   .links {
     display: flex;
+    flex-shrink: 0;
     gap: 12px;
 
     a {
+      white-space: nowrap;
       font-size: 13px;
       font-weight: 700;
       color: ${({ theme }) => theme.colors.text.main};
@@ -249,9 +252,14 @@ export const Experiments = styled.section`
       }
 
       &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.colors.highlight};
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
         outline-offset: 2px;
       }
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin: 24px 16px 0;
+    padding: 0 8px;
   }
 `;

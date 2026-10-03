@@ -4,21 +4,13 @@ import { useTranslation } from 'react-i18next';
 import next from '../../../../assets/images/icons/slider-next.svg';
 import prev from '../../../../assets/images/icons/slider-prev.svg';
 
-import Modal from '../../../../components/Modal';
 import ProjectCard from '../../../../components/Project';
 import { experimentProjects, featuredProjects } from '../../../../data/projects';
-import { type ScreenshotOrientation } from '../../../../types/Project';
 
 import { Experiments, Section, Showcase } from './styles';
 
 interface PortfolioProps {
   id: string;
-}
-
-interface ModalImage {
-  src: string;
-  alt: string;
-  orientation: ScreenshotOrientation;
 }
 
 const EXTERNAL_REL = 'noopener noreferrer';
@@ -30,7 +22,6 @@ function pad(value: number): string {
 export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [modalImage, setModalImage] = useState<ModalImage | null>(null);
 
   const total = featuredProjects.length;
   const activeProject = featuredProjects[activeIndex];
@@ -57,10 +48,6 @@ export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
       setActiveIndex(total - 1);
     }
   }
-
-  const closeModal = useCallback((): void => {
-    setModalImage(null);
-  }, []);
 
   return (
     <Section
@@ -140,9 +127,6 @@ export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
           <ProjectCard
             key={activeProject.id}
             project={activeProject}
-            onOpenImage={(src, alt) => {
-              setModalImage({ src, alt, orientation: activeProject.screenshotOrientation ?? 'landscape' });
-            }}
           />
         </div>
       </Showcase>
@@ -185,14 +169,6 @@ export default function Portfolio({ id }: PortfolioProps): React.JSX.Element {
         </ul>
       </Experiments>
 
-      {modalImage !== null && (
-        <Modal
-          image={modalImage.src}
-          alt={modalImage.alt}
-          orientation={modalImage.orientation}
-          closeModal={closeModal}
-        />
-      )}
     </Section>
   );
 }

@@ -27,13 +27,13 @@ export const Container = styled.div`
     }
 
     &:focus-visible {
-      outline: 2px solid ${({ theme }) => theme.colors.highlight};
+      outline: 2px solid ${({ theme }) => theme.colors.accent};
       outline-offset: 2px;
     }
 
     &[aria-pressed='true'] {
       background: ${({ theme }) => theme.colors.highlight};
-      color: ${({ theme }) => theme.colors.text.light};
+      color: ${({ theme }) => theme.colors.onHighlight};
     }
   }
 `;

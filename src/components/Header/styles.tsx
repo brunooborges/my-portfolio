@@ -22,18 +22,6 @@ const logoShorten = keyframes`
 }
 `;
 
-const headerBackground = keyframes`
-0% {
-    background: transparent;
-}
-100% {
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0) 100% );
-}
-`;
-
 export const Container = styled.header<ContainerProps>`
   width: 100%;
   height: 100%;
@@ -46,10 +34,14 @@ export const Container = styled.header<ContainerProps>`
   z-index: 900;
   transition: all 0.2s ease-out;
 
-  ${({ 'data-isscrolled': isScrolled }) =>
+  /* Scrolled: a solid bar in the page color, as tall as the shortened logo tab (90px, which is also
+     the anchor scroll offset), so links never sit on top of the content behind them. */
+  ${({ 'data-isscrolled': isScrolled, theme }) =>
     isScrolled === true &&
     css`
-      animation: ${headerBackground} 0.2s ease-out forwards;
+      height: 90px;
+      background: ${theme.colors.background};
+      box-shadow: 0 1px 0 ${theme.colors.hairline};
     `};
 
   .logo {
@@ -82,22 +74,30 @@ export const Container = styled.header<ContainerProps>`
       `};
   }
 
-  .header-language {
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     position: absolute;
     top: 36px;
     /* The grey panels end 40px from the window edge: this keeps a 4px gap to their border. */
     right: 44px;
 
-    /* On phones the main menu collapses into the hamburger, but the switcher stays in the bar,
-       just left of the menu button (54px wide, 30px from the edge). */
+    /* On phones the main menu collapses into the hamburger, but the language switcher stays in the
+       bar, just left of the menu button (54px wide, 30px from the edge). The theme toggle moves
+       into the menu, where there is room for it. */
     @media only screen and (max-width: 635px) {
       top: 40px;
       right: 96px;
+
+      .header-theme {
+        display: none;
+      }
     }
 
     /* Very narrow phones: tighter buttons so the switcher clears the logo. */
     @media only screen and (max-width: 360px) {
-      button {
+      [role='group'] button {
         min-width: 32px;
         padding: 6px 8px;
       }
@@ -124,7 +124,7 @@ export const Menu = styled.nav`
     cursor: pointer;
 
     &:hover {
-      color: ${({ theme }) => theme.colors.highlight};
+      color: ${({ theme }) => theme.colors.accent};
     }
 
     &::after {

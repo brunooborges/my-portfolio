@@ -156,6 +156,33 @@ describe('Portfolio', () => {
     expect(within(items[0]).getByRole('link', { name: 'Tic-tac-toe: Source' })).toBeInTheDocument();
   });
 
+  it('draws the slide counter in readable text colors, not the faint tick color', () => {
+    const { container } = renderWithProviders(<Portfolio id='portfolio' />);
+
+    expect(container.querySelector('.total-slide')).toHaveStyle({ color: '#BEBEBE' });
+    expect(container.querySelector('.current-slide')).toHaveStyle({ color: '#FFFFFF' });
+  });
+
+  it('loads the project screenshots lazily, as they sit below the first screen', () => {
+    const { container } = renderWithProviders(<Portfolio id='portfolio' />);
+    const images = container.querySelectorAll('.right-section img');
+
+    expect(images.length).toBeGreaterThan(1);
+    for (const image of images) {
+      expect(image).toHaveAttribute('loading', 'lazy');
+      expect(image).toHaveAttribute('decoding', 'async');
+    }
+  });
+
+  it('keeps each experiment link on one line, so Live and Source never break in two', () => {
+    renderWithProviders(<Portfolio id='portfolio' />);
+    const experiments = screen.getByRole('region', { name: 'More experiments' });
+
+    for (const link of within(experiments).getAllByRole('link')) {
+      expect(window.getComputedStyle(link).whiteSpace, link.textContent ?? '').toBe('nowrap');
+    }
+  });
+
   it('translates the section when the language changes', async () => {
     const user = userEvent.setup();
     renderWithProviders(<Portfolio id='portfolio' />);
@@ -323,6 +350,205 @@ describe('Portfolio', () => {
 
       expect(await screen.findByRole('list', { name: 'Capturas de tela' })).toBeInTheDocument();
       expect(within(activeProject()).getByText(/Dashboard com valor do portfólio/)).toBeInTheDocument();
+    });
+  });
+
+  describe('screenshot navigation', () => {
+    const FIRST = /Dashboard with portfolio value/;
+    const SECOND = /AI directives table/;
+    const LAST = /Sign-in screen with the product tagline/;
+
+    function card(): ReturnType<typeof within> {
+      return within(activeProject());
+    }
+
+    it('offers previous and next controls on the main image of a project with several screenshots', () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      expect(card().getByRole('button', { name: 'Previous screenshot' })).toBeInTheDocument();
+      expect(card().getByRole('button', { name: 'Next screenshot' })).toBeInTheDocument();
+    });
+
+    it('offers no such controls when a project has a single screenshot', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      await user.click(screen.getByRole('button', { name: 'Previous project' }));
+
+      expect(activeProjectName()).toBe('Github Search');
+      expect(card().queryByRole('button', { name: 'Next screenshot' })).toBeNull();
+      expect(card().queryByRole('button', { name: 'Previous screenshot' })).toBeNull();
+    });
+
+    it('moves to the next screenshot, updating the caption and the current thumbnail', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      await user.click(card().getByRole('button', { name: 'Next screenshot' }));
+
+      expect(card().getByText(SECOND)).toBeInTheDocument();
+      expect(card().queryByText(FIRST)).toBeNull();
+      const thumbs = within(card().getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+      expect(thumbs[1]).toHaveAttribute('aria-pressed', 'true');
+      expect(thumbs[0]).toHaveAttribute('aria-pressed', 'false');
+    });
+
+    it('wraps around: previous from the first goes to the last, next from the last goes to the first', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      await user.click(card().getByRole('button', { name: 'Previous screenshot' }));
+      expect(card().getByText(LAST)).toBeInTheDocument();
+
+      await user.click(card().getByRole('button', { name: 'Next screenshot' }));
+      expect(card().getByText(FIRST)).toBeInTheDocument();
+    });
+
+    it('also works with the arrow keys from a thumbnail, without changing the project', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Portfolio id='portfolio' />);
+      within(card().getByRole('list', { name: 'Screenshots' })).getAllByRole('button')[0].focus();
+
+      await user.keyboard('{ArrowRight}');
+      expect(card().getByText(SECOND)).toBeInTheDocument();
+
+      await user.keyboard('{ArrowLeft}{ArrowLeft}');
+      expect(card().getByText(LAST)).toBeInTheDocument();
+      expect(activeProjectName()).toBe('Gazer');
+    });
+
+    it('announces the new caption politely to screen readers', () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      expect(card().getByText(FIRST)).toHaveAttribute('aria-live', 'polite');
+    });
+
+    it('labels the controls in Portuguese too', async () => {
+      renderWithProviders(<Portfolio id='portfolio' />);
+
+      await i18n.changeLanguage('pt-BR');
+
+      expect(await card().findByRole('button', { name: 'Captura anterior' })).toBeInTheDocument();
+      expect(card().getByRole('button', { name: 'Próxima captura' })).toBeInTheDocument();
+    });
+
+    describe('in the enlarged view', () => {
+      async function openEnlarged(): Promise<ReturnType<typeof userEvent.setup>> {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Gazer' }));
+        return user;
+      }
+
+      function dialog(): ReturnType<typeof within> {
+        return within(screen.getByRole('dialog', { name: 'Image preview' }));
+      }
+
+      it('shows previous and next controls and where you are in the set', async () => {
+        await openEnlarged();
+
+        expect(dialog().getByRole('button', { name: 'Previous screenshot' })).toBeInTheDocument();
+        expect(dialog().getByRole('button', { name: 'Next screenshot' })).toBeInTheDocument();
+        expect(dialog().getByText('Image 1 of 6')).toBeInTheDocument();
+      });
+
+      it('shows the next image with its own description when Next is chosen', async () => {
+        const user = await openEnlarged();
+
+        await user.click(dialog().getByRole('button', { name: 'Next screenshot' }));
+
+        expect(dialog().getByRole('img', { name: SECOND })).toBeInTheDocument();
+        expect(dialog().getByText('Image 2 of 6')).toBeInTheDocument();
+      });
+
+      it('moves with the arrow keys and wraps around', async () => {
+        const user = await openEnlarged();
+
+        await user.keyboard('{ArrowLeft}');
+        expect(dialog().getByRole('img', { name: LAST })).toBeInTheDocument();
+        expect(dialog().getByText('Image 6 of 6')).toBeInTheDocument();
+
+        await user.keyboard('{ArrowRight}');
+        expect(dialog().getByRole('img', { name: FIRST })).toBeInTheDocument();
+      });
+
+      it('leaves the project card on the image that was last viewed', async () => {
+        const user = await openEnlarged();
+        await user.click(dialog().getByRole('button', { name: 'Next screenshot' }));
+        await user.click(dialog().getByRole('button', { name: 'Next screenshot' }));
+
+        await user.keyboard('{Escape}');
+
+        expect(screen.queryByRole('dialog')).toBeNull();
+        const thumbs = within(card().getByRole('list', { name: 'Screenshots' })).getAllByRole('button');
+        expect(thumbs[2]).toHaveAttribute('aria-pressed', 'true');
+      });
+
+      it('keeps the keyboard inside the dialog, taking in the new controls', async () => {
+        const user = await openEnlarged();
+        const close = screen.getByRole('button', { name: 'Close image' });
+        const previous = dialog().getByRole('button', { name: 'Previous screenshot' });
+        const next = dialog().getByRole('button', { name: 'Next screenshot' });
+        const imageArea = screen.getByRole('region', { name: /scroll to see all of it/i });
+
+        expect(close).toHaveFocus();
+        await user.tab();
+        expect(previous).toHaveFocus();
+        await user.tab();
+        expect(next).toHaveFocus();
+        await user.tab();
+        expect(imageArea).toHaveFocus();
+        await user.tab();
+        expect(close).toHaveFocus();
+        await user.tab({ shift: true });
+        expect(imageArea).toHaveFocus();
+      });
+
+      it('starts the next image from its top, so a tall one is not left scrolled', async () => {
+        const user = await openEnlarged();
+        const imageArea = screen.getByRole('region', { name: /scroll to see all of it/i });
+        imageArea.scrollTop = 500;
+
+        await user.click(dialog().getByRole('button', { name: 'Next screenshot' }));
+
+        expect(imageArea.scrollTop).toBe(0);
+      });
+
+      it('has no previous or next controls for a project with one screenshot', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+        await user.click(screen.getByRole('button', { name: 'Previous project' }));
+
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Github Search' }));
+
+        expect(dialog().queryByRole('button', { name: 'Next screenshot' })).toBeNull();
+        expect(dialog().queryByText(/Image \d+ of \d+/)).toBeNull();
+      });
+
+      it('works for the portrait phone screenshots too', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+        await user.click(screen.getByRole('button', { name: 'Next project' }));
+        await user.click(screen.getByRole('button', { name: 'Next project' }));
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Foodiary' }));
+
+        await user.click(dialog().getByRole('button', { name: 'Next screenshot' }));
+
+        expect(screen.getByRole('dialog')).toHaveAttribute('data-orientation', 'portrait');
+        expect(dialog().getByText('Image 2 of 5')).toBeInTheDocument();
+        expect(dialog().getByRole('img', { name: /Onboarding step: choosing a goal/ })).toBeInTheDocument();
+      });
+
+      it('describes the controls and the counter in Portuguese', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Portfolio id='portfolio' />);
+        await user.click(screen.getByRole('button', { name: 'Enlarge screenshot of Gazer' }));
+
+        await i18n.changeLanguage('pt-BR');
+
+        const translated = within(await screen.findByRole('dialog', { name: 'Visualização da imagem' }));
+        expect(translated.getByRole('button', { name: 'Próxima captura' })).toBeInTheDocument();
+        expect(translated.getByText('Imagem 1 de 6')).toBeInTheDocument();
+      });
     });
   });
 

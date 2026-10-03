@@ -8,6 +8,13 @@ export default createGlobalStyle`
   font-family: 'Sora', sans-serif;
 }
 
+/* The theme owns the page color. index.html paints a first-paint color on plain html, and root is
+   more specific, so this wins whatever the stylesheet order. Without it that color stays when
+   the theme changes, leaving a dark strip above the first panel in the light theme. */
+:root {
+  background: ${({ theme }) => theme.colors.background};
+}
+
 body {
   background: ${({ theme }) => theme.colors.background};
   font-size: 16px;

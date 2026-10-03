@@ -29,6 +29,17 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Full-Stack Developer' })).toBeInTheDocument();
   });
 
+  it('wraps the sections in a single main landmark between the header and the footer', () => {
+    renderWithProviders(<App />);
+    const main = screen.getByRole('main');
+
+    for (const id of ['intro', 'about', 'portfolio', 'contact']) {
+      expect(main.querySelector(`#${id}`), id).toBeInTheDocument();
+    }
+    expect(screen.getByRole('banner')).not.toContainElement(main);
+    expect(screen.getByRole('contentinfo')).not.toContainElement(main);
+  });
+
   it('navigates with real, keyboard-reachable anchor links to each section', () => {
     renderWithProviders(<App />);
     const nav = screen.getByRole('navigation', { name: 'Main' });
