@@ -39,6 +39,80 @@
     "intro": "I'm open to new opportunities. The quickest way to reach me is by email, or you can find me on LinkedIn and GitHub.",
     "resume": "Download resume (PDF)"
   },
+  "caseStudy": {
+    "open": "Case study",
+    "close": "Close case study",
+    "problem": "The problem",
+    "role": "My role",
+    "flow": "How it works",
+    "flowLabel": "How it works, step by step",
+    "outcome": "The result"
+  },
+  "caseStudies": {
+    "gazer": {
+      "problem": "Prediction markets move fast and there are thousands of them. Gazer analyses them with AI and shows live prices, so traders can find, follow and trade the markets that matter to them, all without leaving Gazer.",
+      "role": "I built the whole product on my own: the Next.js dashboard and the NestJS API behind it.",
+      "flowTitles": [
+        "Dashboard",
+        "API",
+        "Live prices",
+        "Trading without leaving Gazer",
+        "Background jobs",
+        "Billing",
+        "Data"
+      ],
+      "flowDetails": [
+        "Next.js and React with 170+ reusable components. What each subscriber sees depends on their plan.",
+        "A NestJS API in 21 modules. Login uses JWT, and four subscription tiers are enforced on the server, so the browser can never unlock more than the plan allows.",
+        "A Socket.IO gateway streams live prices and order-book updates to the dashboard. It reconnects on its own and watches its own latency, keeping screen updates under 100 ms.",
+        "Users can trade on Polymarket markets (or other prediction-market platforms) without ever leaving Gazer. All Gazer needs is a trading gateway, like BR.Money for Polymarket, which handles the wallet and the orders, so the whole path from analysis to trade stays in one app.",
+        "Bull and Redis queues bring in thousands of markets and AI-written analyses in the background, with retries and backoff, within the limits of the outside APIs.",
+        "A billing engine that works with more than one payment provider covers the whole subscription life cycle: checkout, renewals, plan changes, cancellations and refunds.",
+        "PostgreSQL through Prisma stores markets, analyses, users and subscriptions."
+      ],
+      "outcome": "Screen updates in under 100 ms, about 50% less manual billing work, and a complete path from AI analysis to a trade, all inside Gazer."
+    },
+    "brmoney": {
+      "problem": "Companies that want to accept PIX and crypto payments need a gateway they can resell under their own brand. BR.Money is that gateway, and merchants connect to it through an API.",
+      "role": "I built the admin dashboard that cut merchant onboarding time by about 70%, and the 40-module NestJS and Prisma backend behind it.",
+      "flowTitles": [
+        "Brand, merchant, customer",
+        "Scoped access",
+        "Exact money",
+        "Merchant API and webhooks",
+        "One order at a time",
+        "Admin dashboard"
+      ],
+      "flowDetails": [
+        "Three levels: a provider runs its own branded instance, merchants sign up under it, and the merchants’ customers are the ones paying.",
+        "Every request is limited to its own provider and merchant in code, with roles deciding who can see and change what.",
+        "Amounts are stored and calculated as exact decimals, never floating-point numbers, and become plain numbers only at the edge of the API.",
+        "Merchants connect through the API, and payment results reach their systems through webhooks that retry with exponential backoff.",
+        "Orders that spend a balance, including the Polymarket trades that Gazer sends, run one at a time on a queue, so the same money can never be spent twice.",
+        "A Next.js admin dashboard for operators and merchants. It is the part that cut merchant onboarding time by about 70%."
+      ],
+      "outcome": "Merchant onboarding time cut by about 70% by the admin dashboard."
+    },
+    "foodiary": {
+      "problem": "Writing down every meal is tedious. Foodiary lets you photograph a meal or say what you ate, and turns it into calories and macros without typing.",
+      "role": "Built while following the JStack Lab course: the React Native app and the serverless AWS API behind it.",
+      "flowTitles": [
+        "Ask to upload",
+        "Upload to S3",
+        "Queue the work",
+        "Analyse with AI",
+        "Save the result"
+      ],
+      "flowDetails": [
+        "The API checks the file type and size and that the user agreed to AI processing, creates the meal as “uploading” and returns a short-lived pre-signed upload link.",
+        "The app sends the photo or voice note straight to S3. The link signs the file size, so S3 refuses an upload that differs from what was checked.",
+        "When the file lands, S3 triggers a function that puts the meal on an SQS queue. Failed messages go to a dead-letter queue instead of being lost.",
+        "A queue-driven Lambda moves the meal from “uploading” to “processing” in one conditional update, so only one worker can call the paid AI. It re-checks consent, then asks the AI model to identify the foods and their macros.",
+        "Foods, calories and macros are saved in PostgreSQL (Drizzle) and the meal becomes “success” or “failed”. The app reads it from the API."
+      ],
+      "outcome": "The API answers at once and the slow AI step runs in the background, so a meal moves through uploading, processing and success or failed without ever blocking the app."
+    }
+  },
   "portfolio": {
     "title": "Portfolio",
     "previous": "Previous project",
@@ -84,6 +158,7 @@
         "Sign-in screen with the product tagline."
       ],
       "highlights": [
+        "Users can trade on Polymarket (or other platforms) without leaving the app, through a trading gateway.",
         "Next.js and React dashboard with 170+ reusable components.",
         "Real-time price updates in under 100ms.",
         "Backed by a 21-module NestJS API."

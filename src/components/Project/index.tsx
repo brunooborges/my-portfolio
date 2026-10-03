@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import useTranslatedList from '../../hooks/useTranslatedList';
 import wrapIndex from '../../lib/wrapIndex';
 import { type Project } from '../../types/Project';
+import CaseStudy from '../CaseStudy';
 import ChevronIcon from '../ChevronIcon';
 import Modal from '../Modal';
 import { Container } from './styles';
@@ -17,14 +18,25 @@ const EXTERNAL_REL = 'noopener noreferrer';
 
 export default function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
   const { t } = useTranslation();
-  const { slug, name, visibility, tech, screenshots = [], screenshotOrientation = 'landscape', github, github2, live } =
-    project;
+  const {
+    slug,
+    name,
+    visibility,
+    tech,
+    screenshots = [],
+    screenshotOrientation = 'landscape',
+    caseStudy,
+    github,
+    github2,
+    live,
+  } = project;
 
   const summary = t(`projects.${slug}.summary`);
   const highlightList = useTranslatedList(`projects.${slug}.highlights`);
   const captions = useTranslatedList(`projects.${slug}.screenshots`);
   const [activeImage, setActiveImage] = useState(0);
   const [isEnlarged, setIsEnlarged] = useState(false);
+  const [isCaseStudyOpen, setIsCaseStudyOpen] = useState(false);
   const enlargeLabel = t('portfolio.openImage', { name });
   const captionOf = (index: number): string => captions[index] ?? t('portfolio.screenshotAlt', { name });
   const hasGallery = screenshots.length > 1;
@@ -33,6 +45,10 @@ export default function ProjectCard({ project }: ProjectCardProps): React.JSX.El
 
   const closeEnlarged = useCallback((): void => {
     setIsEnlarged(false);
+  }, []);
+
+  const closeCaseStudy = useCallback((): void => {
+    setIsCaseStudyOpen(false);
   }, []);
 
   function showImage(step: number): void {
@@ -84,6 +100,19 @@ export default function ProjectCard({ project }: ProjectCardProps): React.JSX.El
             <li key={item}>{item}</li>
           ))}
         </ul>
+
+        {caseStudy !== undefined && (
+          <button
+            type='button'
+            className='case-study-button'
+            aria-haspopup='dialog'
+            onClick={() => {
+              setIsCaseStudyOpen(true);
+            }}
+          >
+            {t('caseStudy.open')}
+          </button>
+        )}
 
         {github !== undefined && (
           <div className='links'>
@@ -227,6 +256,17 @@ export default function ProjectCard({ project }: ProjectCardProps): React.JSX.El
           </a>
         )}
       </div>
+
+      {isCaseStudyOpen &&
+        caseStudy !== undefined &&
+        createPortal(
+          <CaseStudy
+            slug={caseStudy}
+            name={name}
+            onClose={closeCaseStudy}
+          />,
+          document.body,
+        )}
 
       {isEnlarged &&
         currentImage !== undefined &&

@@ -14,8 +14,8 @@ describe('useTranslatedList', () => {
       wrapper: Providers,
     });
 
-    expect(result.current).toHaveLength(3);
-    expect(result.current[0]).toMatch(/170\+ reusable components/);
+    expect(result.current).toHaveLength(4);
+    expect(result.current.some((highlight) => /170\+ reusable components/.test(highlight))).toBe(true);
   });
 
   it('returns an empty list for a key that does not exist', () => {

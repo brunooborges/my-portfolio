@@ -8,6 +8,9 @@ export type ScreenshotOrientation = 'landscape' | 'portrait';
 /** A project that has copy in the locale files (`projects.<slug>`). */
 export type ProjectSlug = keyof typeof enUS.projects;
 
+/** A project that has a case study in the locale files (`caseStudies.<slug>`). */
+export type CaseStudySlug = keyof typeof enUS.caseStudies;
+
 export interface Project {
   id: number;
   slug: ProjectSlug;
@@ -21,6 +24,8 @@ export interface Project {
   screenshots?: readonly string[];
   /** Defaults to `landscape`. `portrait` gives the card and the enlarged view a phone-shaped frame. */
   screenshotOrientation?: ScreenshotOrientation;
+  /** Set when the project has a case study; the card then offers it in a dialog. */
+  caseStudy?: CaseStudySlug;
   github?: string;
   /** Second repository (e.g. the API next to a front end). */
   github2?: string;

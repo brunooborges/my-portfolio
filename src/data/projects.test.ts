@@ -115,6 +115,15 @@ describe('projects data', () => {
     }
   });
 
+  it('offers a case study for Gazer, BR.Money and Foodiary only, each pointing at its own story', () => {
+    const withStudy = projects.filter((project) => project.caseStudy !== undefined);
+
+    expect(withStudy.map((project) => project.slug)).toEqual(['gazer', 'brmoney', 'foodiary']);
+    for (const project of withStudy) {
+      expect(project.caseStudy, project.slug).toBe(project.slug);
+    }
+  });
+
   it('never reuses the same image twice within a project', () => {
     for (const project of projects) {
       const images = project.screenshots ?? [];
